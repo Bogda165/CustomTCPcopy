@@ -9,14 +9,12 @@ Data::Data() {
     type = data_type::VEC;
     max_buffer_len = 1024;
     buffer = std::vector<uint8_t>(1024, 0);
-    chunk_len = 256;
+    chunk_len = 8;
+    offset = 0;
 }
 
 // not save
 void Data::insertChunk(int n, std::vector<uint8_t> chunk) {
-    if (n > data_len) {
-        data_len = n;
-    }
 
     buffer_s = status::FILLED;
 
@@ -101,19 +99,35 @@ void Data::clearBuffer() {
 
 
 void Data::addChunk(int n, std::vector<uint8_t> chunk) {
+    auto _buffer = std::vector<uint8_t>(chunk_len, 0);
+
     if (n >= max_buffer_len && type == data_type::VEC) {
         //change_to_file
     }
 
-    this->insertChunk(n, std::move(chunk));
+    if (n > data_len) {
+        data_len = n;
+        offset = chunk_len - chunk.size();
+    }
+
+    std::copy(chunk.begin(), chunk.end(), _buffer.begin());
+
+    this->insertChunk(n, std::move(_buffer));
 }
 
 void Data::addChunk(int n, std::string chunk) {
-    auto _buffer = std::vector<uint8_t>(chunk.begin(), chunk.end());
+    auto _buffer = std::vector<uint8_t>(chunk_len, 0);
 
-    if(n >= max_buffer_len){
+    if (n >= max_buffer_len && type == data_type::VEC) {
         //change_to_file
     }
+
+    if (n > data_len) {
+        data_len = n;
+        offset = chunk_len - chunk.size();
+    }
+
+    std::copy(chunk.begin(), chunk.end(), _buffer.begin());
 
     this->insertChunk(n, _buffer);
 }
@@ -122,7 +136,7 @@ std::vector<uint8_t> Data::getData(){
     if (type == data_type::VEC) {
         auto _vec = std::vector<uint8_t>();
 
-        _vec.assign(buffer.begin(), buffer.begin() + chunk_len * (data_len + 1));
+        _vec.assign(buffer.begin(), buffer.begin() + chunk_len * (data_len + 1) - offset);
 
         return _vec;
     }else{
@@ -136,4 +150,25 @@ void Data::show_data() {
     }
 
     std::cout << std::endl;
+}
+
+void fromString(std::string& str, Data& data) {
+
+    int n = str.length() / data.getChunkLen();
+
+    for (int i = 0; i < n; i++) {
+        std::string _str = str.substr(i * data.getChunkLen(), data.getChunkLen());
+        std::cout << _str << ":> " <<_str.length() << std::endl;
+        data.addChunk(i, _str);
+    }
+    std::string _str = str.substr(n * data.getChunkLen(), str.length() % data.getChunkLen());
+    std::cout << _str << ":> " <<_str.length() << std::endl;
+    data.addChunk(n, _str);
+}
+
+std::string Data::toString() {
+    auto _buffer = this->getData();
+    std::string str(_buffer.begin(), _buffer.end());
+
+    return str;
 }

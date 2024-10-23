@@ -55,7 +55,6 @@ void send_message(std::shared_ptr<MySocket> socket) {
 }
 
 int main() {
-    /*
     int port;
 
     std::cout << "Enter port: ";
@@ -99,16 +98,6 @@ int main() {
 
     recv_thread.join();
     //send_thread.join();
-*/
-    std::unique_ptr<Data> data = std::make_unique<Data>();
 
-    data->setChunkLen(10);
-    data->setMaxBufferLen(100);
-
-    data->show();
-
-    data->addChunk(9, std::vector<uint8_t>(10, 1));
-
-    data->show_data();
     return 0;
 }

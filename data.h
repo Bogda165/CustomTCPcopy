@@ -18,7 +18,6 @@ enum class status {
     FILLED,
 };
 
-
 class Data {
 private:
     data_type type;
@@ -34,6 +33,9 @@ private:
     int chunk_len;
 
     int max_buffer_len;
+
+    //offset for the last buffer from the rigth side
+    int offset;
 public:
     data_type getType() const;
 
@@ -73,7 +75,10 @@ public:
     void show() const;
 
     void show_data();
+
+    std::string toString();
 };
 
+void fromString(std::string& str, Data& data);
 
 #endif //PKS_PROJECT_DATA_H
