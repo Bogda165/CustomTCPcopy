@@ -1,0 +1,3 @@
+/Users/user/CLionProjects/Pks_project/build/CMakeFiles/Pks_project.dir
+/Users/user/CLionProjects/Pks_project/build/CMakeFiles/edit_cache.dir
+/Users/user/CLionProjects/Pks_project/build/CMakeFiles/rebuild_cache.dir
