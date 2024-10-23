@@ -14,6 +14,8 @@ add_executable(Pks_project main.cpp
         MySocket.cpp
         MySocket.h
         data.cpp
-        data.h)
+        data.h
+        header.cpp
+        header.h)
 
 target_link_libraries(Pks_project ${Boost_LIBRARIES})

@@ -3,6 +3,7 @@
 #include "MySocket.h"
 #include <thread>
 #include "data.h"
+#include "header.h"
 #include <chrono>
 
 using boost::asio::ip::udp;
@@ -55,6 +56,7 @@ void send_message(std::shared_ptr<MySocket> socket) {
 }
 
 int main() {
+    /*
     int port;
 
     std::cout << "Enter port: ";
@@ -98,6 +100,21 @@ int main() {
 
     recv_thread.join();
     //send_thread.join();
+*/
+    std::unique_ptr<Data> data = std::make_unique<Data>();
 
+    data->setChunkLen(10);
+    data->setMaxBufferLen(100);
+
+    data->addChunk(1, std::vector<uint8_t>(9, 1));
+    data->addChunk(4, std::vector<uint8_t>(5, 4));
+    data->addChunk(3, std::vector<uint8_t>(8, 3));
+    data->addChunk(2, std::vector<uint8_t>(10, 2));
+
+    data->show_data();
+
+    std::unique_ptr<Header> header = std::make_unique<Header>(10, Flags::SYN, Flags::ACK);
+
+    header->show();
     return 0;
 }

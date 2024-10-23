@@ -73,6 +73,14 @@ build CMakeFiles/Pks_project.dir/data.cpp.o: CXX_COMPILER__Pks_project_unscanned
   OBJECT_DIR = CMakeFiles/Pks_project.dir
   OBJECT_FILE_DIR = CMakeFiles/Pks_project.dir
 
+build CMakeFiles/Pks_project.dir/header.cpp.o: CXX_COMPILER__Pks_project_unscanned_Debug /Users/user/CLionProjects/Pks_project/header.cpp || cmake_object_order_depends_target_Pks_project
+  DEFINES = -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB
+  DEP_FILE = CMakeFiles/Pks_project.dir/header.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  INCLUDES = -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/Pks_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/Pks_project.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Pks_project
@@ -81,7 +89,7 @@ build CMakeFiles/Pks_project.dir/data.cpp.o: CXX_COMPILER__Pks_project_unscanned
 #############################################
 # Link the executable Pks_project
 
-build Pks_project: CXX_EXECUTABLE_LINKER__Pks_project_Debug CMakeFiles/Pks_project.dir/main.cpp.o CMakeFiles/Pks_project.dir/MySocket.cpp.o CMakeFiles/Pks_project.dir/data.cpp.o | /opt/homebrew/lib/libboost_system-mt.dylib
+build Pks_project: CXX_EXECUTABLE_LINKER__Pks_project_Debug CMakeFiles/Pks_project.dir/main.cpp.o CMakeFiles/Pks_project.dir/MySocket.cpp.o CMakeFiles/Pks_project.dir/data.cpp.o CMakeFiles/Pks_project.dir/header.cpp.o | /opt/homebrew/lib/libboost_system-mt.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk
   LINK_LIBRARIES = /opt/homebrew/lib/libboost_system-mt.dylib
   OBJECT_DIR = CMakeFiles/Pks_project.dir
