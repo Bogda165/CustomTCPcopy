@@ -7,6 +7,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include "../Packet/Packet.h"
 
 enum class data_type {
     VEC,
@@ -30,9 +31,9 @@ private:
     //the length of the data, each time something added to a buffer, check if data_len greather then n, change it
     int data_len;
 
-    int chunk_len;
+    static int chunk_len;
 
-    int max_buffer_len;
+    static int max_buffer_len;
 
     //offset for the last buffer from the rigth side
     int offset;
@@ -63,6 +64,10 @@ public:
 
     Data();
 
+    Data(std::vector<uint8_t> buffer);
+
+    Data(std::string str);
+
 
     // is is the index of the chunk
     //chunks length should be the same
@@ -77,8 +82,10 @@ public:
     void show_data();
 
     std::string toString();
+
+    std::vector<std::vector<uint8_t>> getDataByPackets();
+
 };
 
-void fromString(std::string& str, Data& data);
 
 #endif //PKS_PROJECT_DATA_H

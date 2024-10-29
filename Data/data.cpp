@@ -7,10 +7,9 @@
 
 Data::Data() {
     type = data_type::VEC;
-    max_buffer_len = 1024;
-    buffer = std::vector<uint8_t>(1024, 0);
-    chunk_len = 8;
-    offset = 0;
+    buffer = std::vector<uint8_t>(max_buffer_len, 0);
+    offset = -1;
+    data_len = 0;
 }
 
 // not save
@@ -105,8 +104,8 @@ void Data::addChunk(int n, std::vector<uint8_t> chunk) {
         //change_to_file
     }
 
-    if (n > data_len) {
-        data_len = n;
+    if (n >= data_len) {
+        data_len = n + 1;
         offset = chunk_len - chunk.size();
     }
 
@@ -122,8 +121,8 @@ void Data::addChunk(int n, std::string chunk) {
         //change_to_file
     }
 
-    if (n > data_len) {
-        data_len = n;
+    if (n >= data_len) {
+        data_len = n + 1;
         offset = chunk_len - chunk.size();
     }
 
@@ -136,13 +135,32 @@ std::vector<uint8_t> Data::getData(){
     if (type == data_type::VEC) {
         auto _vec = std::vector<uint8_t>();
 
-        _vec.assign(buffer.begin(), buffer.begin() + chunk_len * (data_len + 1) - offset);
+        _vec.assign(buffer.begin(), buffer.begin() + chunk_len * (data_len) - offset);
 
         return _vec;
     }else{
         //realise for a file
     }
 }
+
+std::vector<std::vector<uint8_t>> Data::getDataByPackets() {
+    if (type == data_type::VEC) {
+        auto _vec = std::vector<std::vector<uint8_t>>();
+
+        for(int packet_i = 0; packet_i < data_len - 1; packet_i ++) {
+            _vec.push_back(std::move(std::vector(buffer.begin() + packet_i * chunk_len, buffer.begin() + (packet_i + 1) * chunk_len)));
+        }
+
+        _vec.push_back(std::move(std::vector(buffer.begin() + (data_len - 1) * chunk_len, buffer.begin() + chunk_len * data_len - offset)));
+
+        return _vec;
+    }else{
+        //realise for a file
+    }
+}
+
+
+
 
 void Data::show_data() {
     for (auto i: this->getData()) {
@@ -152,18 +170,18 @@ void Data::show_data() {
     std::cout << std::endl;
 }
 
-void fromString(std::string& str, Data& data) {
+Data::Data(std::string str): Data() {
 
-    int n = str.length() / data.getChunkLen();
+    int n = str.length() / this->getChunkLen();
 
     for (int i = 0; i < n; i++) {
-        std::string _str = str.substr(i * data.getChunkLen(), data.getChunkLen());
+        std::string _str = str.substr(i * this->getChunkLen(), this->getChunkLen());
         std::cout << _str << ":> " <<_str.length() << std::endl;
-        data.addChunk(i, _str);
+        this->addChunk(i, _str);
     }
-    std::string _str = str.substr(n * data.getChunkLen(), str.length() % data.getChunkLen());
+    std::string _str = str.substr(n * this->getChunkLen(), str.length() % this->getChunkLen());
     std::cout << _str << ":> " <<_str.length() << std::endl;
-    data.addChunk(n, _str);
+    this->addChunk(n, _str);
 }
 
 std::string Data::toString() {
@@ -171,4 +189,13 @@ std::string Data::toString() {
     std::string str(_buffer.begin(), _buffer.end());
 
     return str;
+}
+
+Data::Data(std::vector<uint8_t> buffer): Data() {
+    int n = buffer.size() / this->getChunkLen();
+
+    for (int i = 0; i < n; i++) {
+        this->addChunk(i, std::move(std::vector(buffer.begin() + i * this->getChunkLen(), buffer.begin() + (i + 1) * this->getChunkLen())));
+    }
+    this->addChunk(n, std::move(std::vector(buffer.begin() + n * this->getChunkLen(), buffer.end())));
 }

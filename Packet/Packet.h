@@ -1,0 +1,32 @@
+//
+// Created by User on 26/10/2024.
+//
+
+#ifndef PKS_PROJECT_PACKET_H
+#define PKS_PROJECT_PACKET_H
+
+#include "../Socket/header.h"
+#include "../Sendable/Sendable.h"
+
+class Packet: public Sendable {
+private:
+    Header header;
+    std::vector<uint8_t> chunk;
+
+public:
+    Header getHeader();
+    std::vector<uint8_t> getChunk();
+
+    Packet();
+    Packet(Header _header, std::vector<uint8_t> _chunk);
+
+    void show() const ;
+
+    virtual std::vector<uint8_t> toU8() override;
+    virtual void fromU8(std::vector<uint8_t> buffer) override;
+
+    static std::vector<Packet> fromBuffer(std::vector<uint8_t> buffer);
+};
+
+
+#endif //PKS_PROJECT_PACKET_H
