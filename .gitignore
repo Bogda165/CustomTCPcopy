@@ -1,0 +1,39 @@
+# Build directories
+cmake-build-debug
+build
+
+# C++/C specific
+*.o
+*.obj
+*.so
+*.exe
+*.out
+*.a
+*.lib
+*.dll
+*.dylib
+*.pdb
+*.idb
+*.class
+
+# CMake specific
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# CLion specific
+.idea/
+*.iml
+
+# TypeScript specific
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db

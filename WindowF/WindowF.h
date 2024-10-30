@@ -42,7 +42,10 @@ public:
     }
 
     void addToBuffer(int seq_n, T obj) {
-        if (seq_n >= indexes->first && seq_n <= indexes->second) {
+        if(seq_n < 0) {
+            //priority message
+            return;
+        }if (seq_n >= indexes->first && seq_n <= indexes->second) {
             buffer.insert(std::make_pair(seq_n, std::move(obj)));
         } else {
             throw std::out_of_range("Sequence number is out of range!!!");
@@ -50,6 +53,13 @@ public:
     }
 
     T getFromBuffer(int seq_n) {
+        if (seq_n < 0) {
+            //priority messsage
+            std::cout << "Priority message received!!!" << std::endl;
+        }else if(seq_n < indexes->first){
+            //ack was lost
+            throw std::out_of_range("ack was lost!!!");
+        }
         if (seq_n >= indexes->first && seq_n < indexes->second) {
             auto it = buffer.find(seq_n);
             if (it != buffer.end()) {

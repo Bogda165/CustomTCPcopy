@@ -24,6 +24,11 @@ public:
 
     bool Condition(std::unique_ptr<Sendable> obj) override {
         try {
+            //priority for example ask or syn or fin
+            if (obj->getSequenceNumber() < 0) {
+                std::cout << "Pmessage" << std::endl;
+                return true;
+            }
             this->addToBuffer(obj->getSequenceNumber(), std::move(obj));
         }catch (const std::out_of_range &e) {
             return  false;

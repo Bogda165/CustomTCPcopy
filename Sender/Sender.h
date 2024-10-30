@@ -116,6 +116,7 @@ public:
                     }
 
                     this->sendToEvery(_endpoint);
+                    // add to container from window
 
                     // Exit condition could be added here for controlled termination if needed
                     std::this_thread::sleep_for(std::chrono::seconds(interval_seconds));
