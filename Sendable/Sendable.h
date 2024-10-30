@@ -11,6 +11,10 @@ public:
     virtual void fromU8(std::vector<uint8_t> buffer) = 0;
 
     virtual std::vector<uint8_t> toU8() = 0;
+
+    virtual int getSequenceNumber() const = 0;
+
+    virtual std::unique_ptr<Sendable> clone() const = 0;
 };
 
 

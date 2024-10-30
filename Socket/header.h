@@ -67,6 +67,8 @@ public:
 
     virtual std::vector<uint8_t> toU8() override;
 
+    virtual int getSequenceNumber() const override;
+
     bool getFlags(Flags flag);
 
     void setFlag(Flags flag);
@@ -88,13 +90,15 @@ public:
 
     void setOffset(int _offset);
 
-    int getSequenceNumber() const;
-
     void setSequenceNumber(int _sq);
 
     void show() const;
 
     static int getLength();
+
+    virtual std::unique_ptr<Sendable> clone() const override {
+        return std::make_unique<Header>(*this);
+    }
 };
 
 

@@ -5,19 +5,7 @@
 #include "myReceiver.h"
 
 // MyReceiver.cpp
-MyReceiver::MyReceiver()
-        : messages(std::make_shared<std::unordered_map<int, std::pair<Header, Data>>>()),
-          messages_m(std::make_shared<std::mutex>()),
-          handShake(std::make_shared<HandShakeStats>()),
-          handShake_m(std::make_shared<std::mutex>()) {
-    // Default constructor implementation
-}
 
-MyReceiver::MyReceiver(std::shared_ptr<HandShakeStats> handShake, std::shared_ptr<std::mutex> handShake_m,
-                       std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>> messages, std::shared_ptr<std::mutex> messages_m,
-                       std::shared_ptr<udp::socket> socket, std::shared_ptr<std::mutex> socket_m)
-        : handShake(handShake), handShake_m(handShake_m), messages(messages), messages_m(messages_m), Receiver(socket, socket_m) {
-}
 
 bool MyReceiver::onReceive() {
     // handle what to do with the message detect if its a handshake or whatever
@@ -49,6 +37,15 @@ bool MyReceiver::onReceive() {
 
     // chech if we need data: Now 2 main types hand shake and message later add acknolegment and keep alive
 
+    //TODO change this shit with encapsulation
+    auto handShake_p = customSocket->getHandShakeStat();
+    auto handShake = handShake_p.first;
+    auto handShake_m = handShake_p.second;
+
+    auto messages_p = customSocket->getMessages();
+    auto messages = messages_p.first;
+    auto messages_m = messages_p.second;
+
     //if Hand shake
     if (header->getFlags(Flags::ACK) || header->getFlags(Flags::SYN)) {
         std::lock_guard<std::mutex> lock(*handShake_m);
@@ -74,18 +71,5 @@ bool MyReceiver::onReceive() {
             }
         }
     }
-}
 
-
-
-void MyReceiver::showMessages() {
-    std::lock_guard<std::mutex> lock(*messages_m);
-    std::cout << "Messages: ";
-    for (const auto& key : *messages) {
-        std::cout << "Key" << key.first;
-
-        std::cout << "Data: ";
-        key.second.second.show();
-    }
-    std::cout << std::endl;
 }

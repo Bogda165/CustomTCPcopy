@@ -6,12 +6,12 @@
 #include "Socket/header.h"
 #include <chrono>
 #include "WindowF/WindowF.h"
+#include "Receivers/myReceiver.h"
 
 int Data::chunk_len = 10;
 int Data::max_buffer_len = 1024;
 
-template<typename T>
-int WindowF<T>::max_buffer_size = 5;
+
 
 using boost::asio::ip::udp;
 
@@ -84,9 +84,13 @@ int main() {
     std::cout << "Enter port: ";
     std::cin >> _port;
 
-    MySocket socket(_port, "127.0.0.1", std::ref(io_context));
+    auto socket= std::make_shared<MySocket>(_port, "127.0.0.1", std::ref(io_context));
 
-    auto recv_thread = socket.getReceiver().first->run(2);
+    auto receiver = std::make_shared<MyReceiver>(socket);
+
+    auto recv_thread = receiver->run(2);
+
+    int sq = 0;
 
     while(true) {
         std::cout << "Enter you command: ";
@@ -99,7 +103,7 @@ int main() {
                 std::cout << "Error while reading a port" << std::endl;
             }
             // get header
-            socket.getHandShakeStat().first->tryConnect(_port);
+            socket->getHandShakeStat().first->tryConnect(_port);
 
         }else if(cmd == "message") {
             std::vector<uint8_t> vec(data.begin(), data.end());
@@ -126,6 +130,7 @@ int main() {
                 header.setPacketId(packet_id);
                 header.setMessageId(message_id);
                 header.setOffset(packet.size());
+                header.setSequenceNumber(sq);
                 Packet to_send(header, packet);
 
                 to_send.show();
@@ -141,17 +146,18 @@ int main() {
 
                 std::unique_ptr<Sendable> obj = std::make_unique<Packet>(to_send);
                 
-                socket.addToContainer(std::move(obj));
+                socket->addToContainer(std::move(obj));
                 
                 packet_id ++;
+                sq ++;
             }
 
             message_id ++;
 
-            std::cout << "Sent to port " << socket.getHandShakeStat().first->getPort() << std::endl;
+            std::cout << "Sent to port " << socket->getHandShakeStat().first->getPort() << std::endl;
             //send message
         }else if (cmd == "show"){
-            auto socket_m = socket.getMessages();
+            auto socket_m = socket->getMessages();
             std::lock_guard<std::mutex> lock(*socket_m.second);
             for (auto& message: *(socket_m.first)) {
                 std::cout << "Message " << message.first << " ";
@@ -162,7 +168,7 @@ int main() {
         };
     }
 
-    recv_thread.join();
+    //recv_thread.join();
 
 
 

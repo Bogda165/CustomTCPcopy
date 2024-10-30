@@ -24,6 +24,11 @@ public:
 
     virtual std::vector<uint8_t> toU8() override;
     virtual void fromU8(std::vector<uint8_t> buffer) override;
+    virtual int getSequenceNumber()const override;
+
+    virtual std::unique_ptr<Sendable> clone() const override {
+        return std::make_unique<Packet>(*this);
+    }
 
     static std::vector<Packet> fromBuffer(std::vector<uint8_t> buffer);
 };

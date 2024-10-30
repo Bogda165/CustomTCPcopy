@@ -28,6 +28,7 @@ protected:
     std::shared_ptr<Container> container;
 
     SenderState run;
+    int skipped;
     std::shared_ptr<std::mutex> block_contaier_m;
 
 public:
@@ -38,6 +39,8 @@ public:
         container_m = std::make_shared<std::mutex>();
         run = SenderState::STOPPED;
         block_contaier_m =  nullptr;
+        skipped = 0;
+        block_contaier_m = std::make_shared<std::mutex>();
     }
 
     virtual void sendTo(udp::endpoint endpoint, std::vector<uint8_t>) = 0;
@@ -46,9 +49,9 @@ public:
 
     virtual std::unique_ptr<Sendable> getFromContainer() = 0;
 
-    void Condition() {
+    virtual std::unique_ptr<Sendable> lookFromContainer() = 0;
 
-    }
+    virtual bool Condition(std::unique_ptr<Sendable> obj) = 0;
 
     virtual int size() const = 0;
 
@@ -59,20 +62,28 @@ public:
         std::cout << std::endl;
     }
 
+    void skip() {
+        auto obj = getFromContainer();
+        addToContainer(std::move(obj));
+        skipped ++;
+    }
+
     std::pair<std::shared_ptr<std::mutex>, std::shared_ptr<Container>> getContainer() {
         return std::make_pair(container_m, container);
     }
 
     void sendToEvery(udp::endpoint endpoint) {
-        while (this->size() > 0) {
+        while ((this->size() - skipped) > 0) {
             {
                 this->run = SenderState::BLOCKED;
                 std::lock_guard<std::mutex> lock(*block_contaier_m);
                 this->run = SenderState::RUNNING;
             }
 
-            if (!Condition()) {
-                return;
+            if (!Condition(lookFromContainer())) {
+                std::cout << "Skipped" << std::endl;
+                skip();
+                continue;
             }
 
             std::cout << "Sending a packet" << std::endl;
@@ -80,6 +91,7 @@ public:
 
             sendTo(endpoint, packet_b->toU8());
         }
+        skipped = 0;
     }
 
 
@@ -90,7 +102,7 @@ public:
         }
 
         //mutex for blocking a thread
-        block_contaier_m = std::make_shared<std::mutex>(std::mutex());
+        block_contaier_m = std::make_shared<std::mutex>();
         run = SenderState::RUNNING;
 
 

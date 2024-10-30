@@ -12,26 +12,28 @@
 #include <mutex>
 #include <memory>
 #include "../Socket/HandShakeStats.h"
+#include "../Socket/MySocket.h"
 
-class MyReceiver: public Receiver  {
+class MyReceiver: public Receiver {
 private:
-    std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>> messages;
-    std::shared_ptr<std::mutex> messages_m;
-
-    std::shared_ptr<HandShakeStats> handShake;
-    std::shared_ptr<std::mutex> handShake_m;
+    std::shared_ptr<MySocket> customSocket;
 public:
-    MyReceiver(std::shared_ptr<HandShakeStats> handShake, std::shared_ptr<std::mutex> handShake_m,
-               std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>> messages, std::shared_ptr<std::mutex> messages_m,
-               std::shared_ptr<udp::socket> socket, std::shared_ptr<std::mutex> socket_m);
+    MyReceiver() = default;
+    MyReceiver(std::shared_ptr<MySocket> customSocket): Receiver(customSocket->getSocket().first, customSocket->getSocket().second) {
+        this->customSocket = std::move(customSocket);
+    };
 
-    MyReceiver();
+    void setSocket(std::shared_ptr<MySocket> socket) {
+        this->customSocket = socket;
+        this->socket = socket->getSocket().first;
+        this->socket_m = socket->getSocket().second;
+    }
+
+    std::shared_ptr<MySocket> getSocket() {
+        return this->customSocket;
+    }
 
     bool onReceive() override;
-
-    void showMessages();
-
-    void getMessage(int n);
 };
 
 

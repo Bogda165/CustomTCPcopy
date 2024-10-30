@@ -5,3 +5,19 @@ add a cond var to sender queue, when cond var start timout x, send all queue, wa
 when the window of sender is full, block run sender thread, so the 
 
 do not forget to add timeouts everywhere!!!!
+
+
+
+connect
+port: 
+contaction created
+
+
+connect
+port: 8080
+connetion created
+
+
+connect 8080
+
+

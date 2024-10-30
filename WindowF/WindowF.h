@@ -19,7 +19,7 @@ struct Comporator {
 template<class T>
 class WindowF {
 
-private:
+protected:
     std::unordered_map<int, T> buffer;
     std::shared_ptr<std::pair<int, int>> indexes;
     std::priority_queue<int, std::vector<int>, Comporator<int>> indexes_b;
@@ -43,7 +43,7 @@ public:
 
     void addToBuffer(int seq_n, T obj) {
         if (seq_n >= indexes->first && seq_n <= indexes->second) {
-            buffer[seq_n] = std::move(obj);
+            buffer.insert(std::make_pair(seq_n, std::move(obj)));
         } else {
             throw std::out_of_range("Sequence number is out of range!!!");
         }

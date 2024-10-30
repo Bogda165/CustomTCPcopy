@@ -26,8 +26,7 @@ bool MySocket::isConnected() {
     return handShake->isConnected();
 }
 
-
-MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context) : Sender<std::vector<std::unique_ptr<Sendable>>>() {
+MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context) : MyWindow<std::vector<std::unique_ptr<Sendable>>, Sendable>() {
     this->port = port;
     this->ip = ip;
 
@@ -42,11 +41,7 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     handShake = std::make_shared<HandShakeStats>(socket, socket_m);
     handShake_m = std::make_shared<std::mutex>();
 
-    receiver = std::make_shared<MyReceiver>(handShake, handShake_m, messages, messages_m, socket, socket_m);
-    // Mutex is possibly unnecessary
-    receiver_m = std::make_shared<std::mutex>();
-
-    auto hui = runSender(handShake->getEndpoint(), 10);
+    auto hui = this->runSender(handShake->getEndpoint(), 10);
 
     hui.detach();
 }
@@ -82,10 +77,6 @@ void MySocket::sendTo(udp::endpoint endpoint, std::vector<uint8_t> data) {
     this->socket->send_to(boost::asio::buffer(data), udp::endpoint(boost::asio::ip::make_address("127.0.0.1"), send_port));
 }
 
-std::pair<std::shared_ptr<MyReceiver>, std::shared_ptr<std::mutex>> MySocket::getReceiver() {
-    return std::make_pair(receiver, receiver_m);
-}
-
 std::pair<std::shared_ptr<HandShakeStats>, std::shared_ptr<std::mutex>> MySocket::getHandShakeStat() {
     return std::make_pair(handShake, handShake_m);
 }
@@ -110,6 +101,30 @@ std::unique_ptr<Sendable> MySocket::getFromContainer() {
     return std::move(element);
 }
 
+std::unique_ptr<Sendable> MySocket::lookFromContainer() {
+    std::lock_guard<std::mutex> lock(*container_m);
+
+    auto element = container->front()->clone();
+
+    return std::move(element);
+}
+
 int MySocket::size() const {
     return container->size();
+}
+
+void MySocket::showMessages() const {
+    std::lock_guard<std::mutex> lock(*messages_m);
+    std::cout << "Messages: ";
+    for (const auto& key : *messages) {
+        std::cout << "Key" << key.first;
+
+        std::cout << "Data: ";
+        key.second.second.show();
+    }
+    std::cout << std::endl;
+}
+
+std::pair<std::shared_ptr<udp::socket>, std::shared_ptr<std::mutex>> MySocket::getSocket(){
+    return std::make_pair(socket, socket_m);
 }

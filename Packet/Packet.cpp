@@ -52,3 +52,7 @@ void Packet::fromU8(std::vector<uint8_t> buffer) {
     }
     chunk = std::vector(buffer.begin() + Header::getLength(), buffer.end());
 }
+
+int Packet::getSequenceNumber() const {
+    return header.getSequenceNumber();
+}

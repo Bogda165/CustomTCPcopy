@@ -12,14 +12,14 @@
 #include "header.h"
 #include "../Data/data.h"
 #include "HandShakeStats.h"
-#include "../Receivers/myReceiver.h"
 #include "../Sendable/Sendable.h"
 #include "../Sender/Sender.h"
+#include "../WindowF/MyWindow.h"
 #include <queue>
 
 using boost::asio::ip::udp;
 
-class MySocket: public Sender<std::vector<std::unique_ptr<Sendable>>> {
+class MySocket: public MyWindow<std::vector<std::unique_ptr<Sendable>>, Sendable> {
 private:
     // add receive handler
     std::shared_ptr<udp::socket> socket;
@@ -36,11 +36,6 @@ private:
     //hand shake stats for socket
     std::shared_ptr<HandShakeStats> handShake;
     std::shared_ptr<std::mutex> handShake_m;
-
-    //receiver handler
-    std::shared_ptr<MyReceiver> receiver;
-    std::shared_ptr<std::mutex> receiver_m;
-
 
 public:
     MySocket(int port, std::string ip, boost::asio::io_context& io_context);
@@ -59,11 +54,11 @@ public:
 
     std::thread run_receiver();
 
-    std::pair<std::shared_ptr<MyReceiver>, std::shared_ptr<std::mutex>> getReceiver();
-
     std::pair<std::shared_ptr<HandShakeStats>, std::shared_ptr<std::mutex>> getHandShakeStat();
 
     std::pair<std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>>, std::shared_ptr<std::mutex>> getMessages();
+
+    std::pair<std::shared_ptr<udp::socket>, std::shared_ptr<std::mutex>> getSocket();
 
     void sendTo(udp::endpoint endpoint, std::vector<uint8_t> data) override;
 
@@ -71,7 +66,11 @@ public:
 
     virtual std::unique_ptr<Sendable> getFromContainer() override;
 
+    virtual std::unique_ptr<Sendable> lookFromContainer() override;
+
     virtual int size() const override;
+
+    void showMessages()const;
 };
 
 

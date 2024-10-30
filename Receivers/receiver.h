@@ -15,12 +15,37 @@ public:
 public:
     Receiver();
 
-    Receiver(std::shared_ptr<udp::socket> socket, std::shared_ptr<std::mutex> socket_m);
+    Receiver(std::shared_ptr<udp::socket> socket, std::shared_ptr<std::mutex> socket_m)
+            : socket(std::move(socket)), socket_m(std::move(socket_m)) {
+        if (!this->socket || !this->socket_m) {
+            throw std::invalid_argument("Socket and mutex must not be null");
+        }
+    }
 
-    virtual std::thread run(int timeout = 0);
+    void func(std::shared_ptr<Receiver> receiver, int timeout) {
+        std::cout << "starting a loop" << std::endl;
+        //maybe add other functionality later
+        while (true) {
+            std::this_thread::sleep_for(std::chrono::seconds(timeout));
+            if (!receiver->onReceive()) {
+                continue;
+            }
+            std::cout << "received message" << std::endl;
+        }
+    }
+
+    virtual std::thread run(int timeout = 0) {
+        auto self = shared_from_this();
+        return std::thread([self, timeout]() {
+            self->func(self, timeout);
+        });
+    }
 
     virtual bool onReceive() = 0;
 };
+
+
+
 
 
 #endif //PKS_PROJECT_RECEIVER_H
