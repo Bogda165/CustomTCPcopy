@@ -136,8 +136,9 @@ int main() {
                 std::cout << std::endl;
 
                 std::unique_ptr<Sendable> obj = std::make_unique<Packet>(to_send);
-                
+                std::cout << "Main block\n";
                 socket->addToContainer(std::move(obj));
+                std::cout << "Main unblock\n";
                 
                 packet_id ++;
                 sq ++;

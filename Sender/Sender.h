@@ -66,8 +66,8 @@ public:
         return lookFromContainerLF();
     }
 
-    virtual std::unique_ptr<Sendable> isInContainerLF(std::unique_ptr<Sendable> obj) = 0;
-    virtual std::unique_ptr<Sendable> isInContainer(std::unique_ptr<Sendable> obj) {
+    virtual bool isInContainerLF(std::unique_ptr<Sendable> obj) = 0;
+    virtual bool isInContainer(std::unique_ptr<Sendable> obj) {
         std::lock_guard<std::mutex> lock(*container_m);
         return isInContainerLF(std::move(obj));
     }
@@ -110,12 +110,20 @@ public:
             }
 
             {
+                std::cout << "Sender block container" << std::endl;
                 std::lock_guard<std::mutex> lock(*container_m);
 
-                switch (Condition(lookFromContainerLF())) {
+                std::cout << "Sender block buffer" << std::endl;
+                auto obj = lookFromContainerLF();
+                if (obj == nullptr) {
+                    std::cout << "Emtpy" << std::endl;
+                    return;
+                }
+                switch (Condition(std::move(obj))) {
                     case OUT_OF_RANGE::LEFT:
                         std::cout << "out of range left" << std::endl;
                         getFromContainerLF();
+                        continue;
                         break;
                     case OUT_OF_RANGE::RIGHT:
                         std::cout << "Skipped" << std::endl;
@@ -154,8 +162,9 @@ public:
                         std::lock_guard<std::mutex> lock(*endpoint.second);
                         _endpoint = *endpoint.first;
                     }
-
+                    std::cout << "Sender" << std::endl;
                     this->sendToEvery(_endpoint);
+                    std::cout << "Sender unblock" << std::endl;
                     // add to container from window
 
                     // Exit condition could be added here for controlled termination if needed

@@ -42,10 +42,10 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     handShake_m = std::make_shared<std::mutex>();
 
     auto hui = this->runSender(handShake->getEndpoint(), 10);
-    //auto hui2 = this->reSender(10);
+    auto hui2 = this->reSender(10);
 
     hui.detach();
-    //hui2.detach();
+    hui2.detach();
 }
 void MySocket::send_to(std::string send_ip, int port, std::unique_ptr<Sendable> obj, bool flag) {
     {
@@ -88,11 +88,17 @@ std::pair<std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>>, std
 }
 
 void MySocket::addToContainerLF(std::unique_ptr<Sendable> obj) {
-
-    container->push_back(std::move(obj));
+    if (!isInContainerLF(std::move(obj->clone()))) {
+        container->push_back(std::move(obj));
+    }else {
+        std::cout << "The value is already in container!!!" << std::endl;
+    }
 }
 
 std::unique_ptr<Sendable> MySocket::getFromContainerLF() {
+    if (container->size() == 0) {
+        return nullptr;
+    }
     auto element = std::move(container->front());
 
     container->erase(container->begin());
@@ -101,18 +107,24 @@ std::unique_ptr<Sendable> MySocket::getFromContainerLF() {
 }
 
 std::unique_ptr<Sendable> MySocket::lookFromContainerLF() {
+    if (container->size() == 0) {
+        return nullptr;
+    }
     auto element = container->front()->clone();
 
     return std::move(element);
 }
 
-std::unique_ptr<Sendable> MySocket::isInContainerLF(std::unique_ptr<Sendable> obj) {
-    for (auto it = container->begin(); it != container->end(); it++) {
-        if (*it == obj) {
-            return std::move(obj);
+bool MySocket::isInContainerLF(std::unique_ptr<Sendable> obj) {
+    if (container->size() == 0) {
+        return false;
+    }
+    for (auto & it : *container) {
+        if (it == obj) {
+            return true;
         }
     }
-    return nullptr;
+    return false;
 }
 
 int MySocket::size() const {

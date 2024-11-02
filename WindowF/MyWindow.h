@@ -38,13 +38,9 @@ public:
     }
 
     void moveFromWindowToContainer() {
-        std::lock_guard<std::mutex> lock(*this->buffer_m);
-        std::lock_guard<std::mutex> lock2(*this->container_m);
         for (auto it = this->buffer->begin(); it != this->buffer->end(); it ++) {
             std::unique_ptr<Sendable> obj = it->second->clone();
-            if (this->isInContainerLF(obj->clone()) == nullptr) {
-                this->addToContainerLF(std::move(obj));
-            }
+            this->addToContainerLF(std::move(obj));
         }
     }
 
@@ -52,7 +48,13 @@ public:
     std::thread reSender(int timeout) {
         return std::thread([this, timeout]() {
             while(true) {
-                moveFromWindowToContainer();
+                {
+                    std::cout << "ReSender" << std::endl;
+                    std::scoped_lock lock(*this->buffer_m, *this->container_m);
+                    std::cout << "ReSender blocked" << std::endl;
+                    moveFromWindowToContainer();
+                    std::cout << "ReSender unblocked" << std::endl;
+                }
                 std::this_thread::sleep_for(std::chrono::seconds(timeout));
             }
         });

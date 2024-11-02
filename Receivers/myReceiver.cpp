@@ -54,7 +54,13 @@ bool MyReceiver::onReceive() {
 
         return true;
     }else if(header->getFlags(Flags::ACK2)) {
-        this->customSocket->getFromBuffer(-1 * (header->getSequenceNumber() + 1));
+        try {
+            this->customSocket->getFromBuffer(-1 * (header->getSequenceNumber() + 1));
+        }catch(out_of_range_exc &e) {
+            if (e.getCode() == OUT_OF_RANGE::LEFT) {
+                std::cout << "ACK was already sent for this message!!!!(())((" << std::endl;
+            }
+        }
         std::cout << "Recv ack for " << header->getMessageId() << ": " << header->getPacketId() << std::endl;
         return true;
     } else {

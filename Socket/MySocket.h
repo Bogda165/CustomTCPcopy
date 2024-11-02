@@ -68,7 +68,7 @@ public:
 
     virtual std::unique_ptr<Sendable> lookFromContainerLF() override;
 
-    virtual std::unique_ptr<Sendable> isInContainerLF(std::unique_ptr<Sendable>) override;
+    virtual bool isInContainerLF(std::unique_ptr<Sendable>) override;
 
     virtual int size() const override;
 

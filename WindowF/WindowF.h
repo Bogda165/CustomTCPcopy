@@ -47,7 +47,7 @@ public:
         }else if (seq_n > indexes->second) {
             return OUT_OF_RANGE::RIGHT;
         }else {
-            throw std::out_of_range("The value is in the window Idk how is it possible");
+            return OUT_OF_RANGE::IN;
         }
     }
 
@@ -85,12 +85,14 @@ public:
         std::unique_lock lock(*indexes_m);
         std::unique_lock lock3(*indexes_b_m);
         std::unique_lock<std::mutex> lock2(*buffer_m);
+
+        auto type = whichOutOfRangeLF(seq_n);
+
         if (seq_n < 0) {
             //priority messsage
             std::cout << "Priority message received!!!" << std::endl;
-        }else if(seq_n < indexes->first){
-            //ack was lost
-            throw std::out_of_range("ack was lost!!!");
+            std::cout << "sequence number: " << seq_n << std::endl;
+            throw std::runtime_error("I mean wtf find me and kill plz");
         }
         if (seq_n >= indexes->first && seq_n < indexes->second) {
             auto it = buffer->find(seq_n);
@@ -108,8 +110,6 @@ public:
             }
         }
 
-        lock.lock();
-        auto type = whichOutOfRangeLF(seq_n);
         throw out_of_range_exc(type,  "out of range " + std::to_string(static_cast<int>(type)));
     }
 };
