@@ -9,6 +9,7 @@
 #include <type_traits>
 #include <iostream>
 #include <thread>
+#include "../Exceptions/out_of_range_exception.h"
 
 enum class SenderState {
     RUNNING,
@@ -71,7 +72,7 @@ public:
         return isInContainerLF(std::move(obj));
     }
 
-    virtual bool Condition(std::unique_ptr<Sendable> obj) = 0;
+    virtual OUT_OF_RANGE Condition(std::unique_ptr<Sendable> obj) = 0;
 
     virtual int size() const = 0;
 
@@ -110,14 +111,22 @@ public:
 
             {
                 std::lock_guard<std::mutex> lock(*container_m);
-                if (!Condition(lookFromContainerLF())) {
-                    std::cout << "Skipped" << std::endl;
-                    skipLF();
-                    continue;
-                }
 
-                std::cout << "Sending a packet" << std::endl;
-                packet_b = std::move(getFromContainerLF());
+                switch (Condition(lookFromContainerLF())) {
+                    case OUT_OF_RANGE::LEFT:
+                        std::cout << "out of range left" << std::endl;
+                        getFromContainerLF();
+                        break;
+                    case OUT_OF_RANGE::RIGHT:
+                        std::cout << "Skipped" << std::endl;
+                        skipLF();
+                        continue;
+                        break;
+                    case OUT_OF_RANGE::IN:
+                        std::cout << "Sending a packet" << std::endl;
+                        packet_b = std::move(getFromContainerLF());
+                        break;
+                }
             }
 
             sendTo(endpoint, std::move(packet_b->toU8()));

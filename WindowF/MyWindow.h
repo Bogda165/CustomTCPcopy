@@ -22,27 +22,28 @@ public:
     MyWindow(): WindowF<SendableT>(), Sender<Container>(){}
     MyWindow(Container c): WindowF<SendableT>(), Sender<Container>(c){}
 
-    bool Condition(std::unique_ptr<Sendable> obj) override {
+    OUT_OF_RANGE Condition(std::unique_ptr<Sendable> obj) override {
         try {
             //priority for example ask or syn or fin
             if (obj->getSequenceNumber() < 0) {
                 std::cout << "Pmessage" << std::endl;
-                return true;
+                return OUT_OF_RANGE::IN;
             }
             this->addToBuffer(obj->getSequenceNumber(), std::move(obj));
-        }catch (const std::out_of_range &e) {
-            return  false;
+        }catch (const out_of_range_exc &e) {
+            return e.getCode();
         }
 
-        return true;
+        return OUT_OF_RANGE::IN;
     }
 
     void moveFromWindowToContainer() {
         std::lock_guard<std::mutex> lock(*this->buffer_m);
+        std::lock_guard<std::mutex> lock2(*this->container_m);
         for (auto it = this->buffer->begin(); it != this->buffer->end(); it ++) {
             std::unique_ptr<Sendable> obj = it->second->clone();
-            if (this->isInContainer(obj->clone()) == nullptr) {
-                this->addToContainer(std::move(obj));
+            if (this->isInContainerLF(obj->clone()) == nullptr) {
+                this->addToContainerLF(std::move(obj));
             }
         }
     }

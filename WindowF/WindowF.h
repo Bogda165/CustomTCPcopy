@@ -8,6 +8,7 @@
 #include <queue>
 #include <memory>
 #include <stdexcept>
+#include "../Exceptions/out_of_range_exception.h"
 
 template<typename HUI>
 struct Comporator {
@@ -40,6 +41,16 @@ public:
 
     }
 
+    OUT_OF_RANGE whichOutOfRangeLF (int seq_n) {
+        if (seq_n < indexes->first) {
+            return OUT_OF_RANGE::LEFT;
+        }else if (seq_n > indexes->second) {
+            return OUT_OF_RANGE::RIGHT;
+        }else {
+            throw std::out_of_range("The value is in the window Idk how is it possible");
+        }
+    }
+
     void calibrateIndexes(){
         int temp = 0;
         std::scoped_lock lock(*indexes_m, *indexes_b_m);
@@ -65,7 +76,8 @@ public:
                 std::cout << "The value was already in the window" << std::endl;
             }
         } else {
-            throw std::out_of_range("Sequence number is out of range!!!");
+            auto type = whichOutOfRangeLF(seq_n);
+            throw out_of_range_exc(type,  "out of range " + std::to_string(static_cast<int>(type)));
         }
     }
 
@@ -96,7 +108,9 @@ public:
             }
         }
 
-        throw std::out_of_range("Sequence number is out of range!!!");
+        lock.lock();
+        auto type = whichOutOfRangeLF(seq_n);
+        throw out_of_range_exc(type,  "out of range " + std::to_string(static_cast<int>(type)));
     }
 };
 

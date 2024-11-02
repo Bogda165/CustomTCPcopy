@@ -32,6 +32,8 @@ add_executable(Pks_project main.cpp
         Sendable/Sendable.cpp
         Sendable/Sendable.h
         Sender/Sender.cpp
-        Sender/Sender.h)
+        Sender/Sender.h
+        Exceptions/out_of_range_exception.cpp
+        Exceptions/out_of_range_exception.h)
 
 target_link_libraries(Pks_project ${Boost_LIBRARIES})
