@@ -20,39 +20,59 @@ template<class T>
 class WindowF {
 
 protected:
-    std::unordered_map<int, T> buffer;
+
+    std::unique_ptr<std::unordered_map<int, std::unique_ptr<T>>> buffer;
+    std::unique_ptr<std::mutex> buffer_m;
     std::shared_ptr<std::pair<int, int>> indexes;
-    std::priority_queue<int, std::vector<int>, Comporator<int>> indexes_b;
+    std::shared_ptr<std::mutex> indexes_m;
+    std::unique_ptr<std::priority_queue<int, std::vector<int>, Comporator<int>>> indexes_b;
+    std::unique_ptr<std::mutex> indexes_b_m;
 
 public:
 
     static int max_buffer_size;
-    WindowF(){
-        buffer = std::unordered_map<int, T>();
+    WindowF(): buffer(std::make_unique<std::unordered_map<int, std::unique_ptr<T>>>()),
+               buffer_m(std::make_unique<std::mutex>()),
+               indexes_b(std::make_unique<std::priority_queue<int, std::vector<int>, Comporator<int>>>()),
+               indexes_b_m(std::make_unique<std::mutex>()),
+               indexes(std::make_shared<std::pair<int, int>>(0, max_buffer_size)),
+               indexes_m(std::make_shared<std::mutex>()) {
 
-        indexes = std::make_shared<std::pair<int, int>>(std::pair(0, max_buffer_size));
     }
 
     void calibrateIndexes(){
-        while(!indexes_b.empty() && indexes_b.top() == indexes->first) {
-            indexes_b.pop();
+        int temp = 0;
+        std::scoped_lock lock(*indexes_m, *indexes_b_m);
+
+        while (!indexes_b->empty() && indexes_b->top() == indexes->first) {
+            indexes_b->pop();
             indexes->first += 1;
         }
+
         indexes->second = indexes->first + max_buffer_size;
+
     }
 
-    void addToBuffer(int seq_n, T obj) {
+    void addToBuffer(int seq_n, std::unique_ptr<T> obj) {
+        std::scoped_lock lock(*indexes_m, *buffer_m);
         if(seq_n < 0) {
             //priority message
             return;
         }if (seq_n >= indexes->first && seq_n <= indexes->second) {
-            buffer.insert(std::make_pair(seq_n, std::move(obj)));
+            if (buffer->find(seq_n) == buffer->end()) {
+                buffer->insert(std::make_pair(seq_n, std::move(obj)));
+            }else {
+                std::cout << "The value was already in the window" << std::endl;
+            }
         } else {
             throw std::out_of_range("Sequence number is out of range!!!");
         }
     }
 
-    T getFromBuffer(int seq_n) {
+    std::unique_ptr<T> getFromBuffer(int seq_n) {
+        std::unique_lock lock(*indexes_m);
+        std::unique_lock lock3(*indexes_b_m);
+        std::unique_lock<std::mutex> lock2(*buffer_m);
         if (seq_n < 0) {
             //priority messsage
             std::cout << "Priority message received!!!" << std::endl;
@@ -61,15 +81,18 @@ public:
             throw std::out_of_range("ack was lost!!!");
         }
         if (seq_n >= indexes->first && seq_n < indexes->second) {
-            auto it = buffer.find(seq_n);
-            if (it != buffer.end()) {
-                T obj = std::move(it->second);
-                buffer.erase(it);
+            auto it = buffer->find(seq_n);
+            if (it != buffer->end()) {
+                auto obj = std::move(it->second);
+                buffer->erase(it);
 
-                indexes_b.push(seq_n);
+                indexes_b->push(seq_n);
+                lock.unlock();
+                lock2.unlock();
+                lock3.unlock();
                 this->calibrateIndexes();
 
-                return obj;
+                return std::move(obj);
             }
         }
 

@@ -51,9 +51,12 @@ bool MyReceiver::onReceive() {
         std::lock_guard<std::mutex> lock(*handShake_m);
         std::cout << "Process handshake" << std::endl;
         handShake->handleHandShake(std::move(header), sender_endpoint);
+
+        return true;
     }else if(header->getFlags(Flags::ACK2)) {
-        this->customSocket->getFromBuffer(-1 * header->getSequenceNumber());
+        this->customSocket->getFromBuffer(-1 * (header->getSequenceNumber() + 1));
         std::cout << "Recv ack for " << header->getMessageId() << ": " << header->getPacketId() << std::endl;
+        return true;
     } else {
         std::cout << "Process message" << std::endl;
         // just a usual message
@@ -79,13 +82,14 @@ bool MyReceiver::onReceive() {
         {
             //send ack
             auto send_header = Header(Flags::ACK2);
-            send_header.setSequenceNumber(_header->getSequenceNumber() * -1);
+            send_header.setSequenceNumber(_header->getSequenceNumber() * -1 - 1);
             send_header.setPacketId(packet->getHeader().getPacketId());
             send_header.setMessageId(packet->getHeader().getMessageId());
 
             std::unique_ptr<Sendable> _packet = std::make_unique<Header>(send_header);
             this->customSocket->addToContainer(std::move(_packet));
         }
+        return true;
     }
 }
 

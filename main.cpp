@@ -64,15 +64,6 @@ void send_message(std::shared_ptr<MySocket> socket) {
 }
 */
 
-void operation(int n, std::string str, WindowF<std::string>& window_s, WindowF<std::string>& window_a) {
-    window_s.addToBuffer(n, str);
-    std::cout << "Send " << n << std::endl;
-    window_a.addToBuffer(n, str);
-    window_a.getFromBuffer(n);
-    std::cout << "Send ack " << n << std::endl;
-    window_s.getFromBuffer(n);
-}
-
 int main() {
 
     boost::asio::io_context io_context;

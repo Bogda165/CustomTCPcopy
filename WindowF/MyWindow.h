@@ -13,14 +13,14 @@ template <typename T>
 int WindowF<T>::max_buffer_size = 5;
 
 template<typename Container, class SendableT>
-class MyWindow: public WindowF<std::unique_ptr<SendableT>>, public Sender<Container> {
+class MyWindow: public WindowF<SendableT>, public Sender<Container> {
     static_assert(std::is_base_of<Sendable, SendableT>::value, "T must inherit Sendable");
     static_assert(std::is_same<typename std::iterator_traits<typename Container::iterator>::value_type, std::unique_ptr<SendableT>>::value,
                   "Container must hold std::unique_ptr<Sendable>");
 
 public:
-    MyWindow(): WindowF<std::unique_ptr<SendableT>>(), Sender<Container>(){}
-    MyWindow(Container c): WindowF<std::unique_ptr<SendableT>>(), Sender<Container>(c){}
+    MyWindow(): WindowF<SendableT>(), Sender<Container>(){}
+    MyWindow(Container c): WindowF<SendableT>(), Sender<Container>(c){}
 
     bool Condition(std::unique_ptr<Sendable> obj) override {
         try {
@@ -35,6 +35,26 @@ public:
         }
 
         return true;
+    }
+
+    void moveFromWindowToContainer() {
+        std::lock_guard<std::mutex> lock(*this->buffer_m);
+        for (auto it = this->buffer->begin(); it != this->buffer->end(); it ++) {
+            std::unique_ptr<Sendable> obj = it->second->clone();
+            if (this->isInContainer(obj->clone()) == nullptr) {
+                this->addToContainer(std::move(obj));
+            }
+        }
+    }
+
+    // add stop mutex
+    std::thread reSender(int timeout) {
+        return std::thread([this, timeout]() {
+            while(true) {
+                moveFromWindowToContainer();
+                std::this_thread::sleep_for(std::chrono::seconds(timeout));
+            }
+        });
     }
 };
 

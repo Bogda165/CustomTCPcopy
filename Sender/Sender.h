@@ -45,11 +45,31 @@ public:
 
     virtual void sendTo(udp::endpoint endpoint, std::vector<uint8_t>) = 0;
 
-    virtual void addToContainer(std::unique_ptr<Sendable>) = 0;
+    virtual void addToContainerLF(std::unique_ptr<Sendable>) = 0;
 
-    virtual std::unique_ptr<Sendable> getFromContainer() = 0;
+    virtual void addToContainer(std::unique_ptr<Sendable> obj) {
+        std::lock_guard<std::mutex> lock(*container_m);
+        addToContainerLF(std::move(obj));
+    }
 
-    virtual std::unique_ptr<Sendable> lookFromContainer() = 0;
+    virtual std::unique_ptr<Sendable> getFromContainerLF() = 0;
+
+    virtual std::unique_ptr<Sendable> getFromContainer() {
+        std::lock_guard<std::mutex> lock(*container_m);
+        return getFromContainerLF();
+    }
+
+    virtual std::unique_ptr<Sendable> lookFromContainerLF() = 0;
+    virtual std::unique_ptr<Sendable> lookFromContainer() {
+        std::lock_guard<std::mutex> lock(*container_m);
+        return lookFromContainerLF();
+    }
+
+    virtual std::unique_ptr<Sendable> isInContainerLF(std::unique_ptr<Sendable> obj) = 0;
+    virtual std::unique_ptr<Sendable> isInContainer(std::unique_ptr<Sendable> obj) {
+        std::lock_guard<std::mutex> lock(*container_m);
+        return isInContainerLF(std::move(obj));
+    }
 
     virtual bool Condition(std::unique_ptr<Sendable> obj) = 0;
 
@@ -68,11 +88,19 @@ public:
         skipped ++;
     }
 
+    void skipLF() {
+        auto obj = getFromContainerLF();
+        addToContainerLF(std::move(obj));
+        skipped ++;
+    }
+
+
     std::pair<std::shared_ptr<std::mutex>, std::shared_ptr<Container>> getContainer() {
         return std::make_pair(container_m, container);
     }
 
     void sendToEvery(udp::endpoint endpoint) {
+        std::unique_ptr<Sendable> packet_b;
         while ((this->size() - skipped) > 0) {
             {
                 this->run = SenderState::BLOCKED;
@@ -80,16 +108,19 @@ public:
                 this->run = SenderState::RUNNING;
             }
 
-            if (!Condition(lookFromContainer())) {
-                std::cout << "Skipped" << std::endl;
-                skip();
-                continue;
+            {
+                std::lock_guard<std::mutex> lock(*container_m);
+                if (!Condition(lookFromContainerLF())) {
+                    std::cout << "Skipped" << std::endl;
+                    skipLF();
+                    continue;
+                }
+
+                std::cout << "Sending a packet" << std::endl;
+                packet_b = std::move(getFromContainerLF());
             }
 
-            std::cout << "Sending a packet" << std::endl;
-            auto packet_b = std::move(getFromContainer());
-
-            sendTo(endpoint, packet_b->toU8());
+            sendTo(endpoint, std::move(packet_b->toU8()));
         }
         skipped = 0;
     }

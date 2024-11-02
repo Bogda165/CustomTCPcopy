@@ -62,11 +62,13 @@ public:
 
     void sendTo(udp::endpoint endpoint, std::vector<uint8_t> data) override;
 
-    virtual void addToContainer(std::unique_ptr<Sendable>) override;
+    virtual void addToContainerLF(std::unique_ptr<Sendable>) override;
 
-    virtual std::unique_ptr<Sendable> getFromContainer() override;
+    virtual std::unique_ptr<Sendable> getFromContainerLF() override;
 
-    virtual std::unique_ptr<Sendable> lookFromContainer() override;
+    virtual std::unique_ptr<Sendable> lookFromContainerLF() override;
+
+    virtual std::unique_ptr<Sendable> isInContainerLF(std::unique_ptr<Sendable>) override;
 
     virtual int size() const override;
 
