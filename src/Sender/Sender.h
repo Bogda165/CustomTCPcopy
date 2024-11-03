@@ -110,10 +110,8 @@ public:
             }
 
             {
-                std::cout << "Sender block container" << std::endl;
                 std::lock_guard<std::mutex> lock(*container_m);
 
-                std::cout << "Sender block buffer" << std::endl;
                 auto obj = lookFromContainerLF();
                 if (obj == nullptr) {
                     std::cout << "Emtpy" << std::endl;
@@ -162,9 +160,8 @@ public:
                         std::lock_guard<std::mutex> lock(*endpoint.second);
                         _endpoint = *endpoint.first;
                     }
-                    std::cout << "Sender" << std::endl;
+                    std::cout << "Send to every" << std::endl;
                     this->sendToEvery(_endpoint);
-                    std::cout << "Sender unblock" << std::endl;
                     // add to container from window
 
                     // Exit condition could be added here for controlled termination if needed

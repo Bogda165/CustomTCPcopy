@@ -81,6 +81,9 @@ int main() {
 
     auto recv_thread = receiver->run(2);
 
+    auto raw_socket = socket->getSocket();
+    std::unique_lock<std::mutex> lock(*raw_socket.second);
+    lock.unlock();
     int sq = 0;
 
     while(true) {
@@ -155,6 +158,21 @@ int main() {
                 std::cout << "Message " << message.first << " ";
                 std::cout << message.second.second.toString() << std::endl;
             }
+        }else if(cmd == "socket") {
+             if (data == "block" && !lock.owns_lock()) {
+                 lock.lock();
+             }else if(data == "unblock" && lock.owns_lock()) {
+                 lock.unlock();
+             }else {
+                 if (!lock.owns_lock()) {
+                     std::cout << "do not own the lock" << std::endl;
+                 }else {
+                     std::cout << "own the lock" << std::endl;
+                 }
+
+                 std::cout << "it won't work!!!";
+             }
+
         }else {
             std::cout << "ub" << std::endl;
         };

@@ -8,6 +8,7 @@
 #include "../Sendable/Sendable.h"
 #include <memory>
 #include <mutex>
+#include <cmath>
 #include "../Sender/Sender.h"
 template <typename T>
 int WindowF<T>::max_buffer_size = 5;
@@ -39,8 +40,18 @@ public:
 
     void moveFromWindowToContainer() {
         for (auto it = this->buffer->begin(); it != this->buffer->end(); it ++) {
-            std::unique_ptr<Sendable> obj = it->second->clone();
-            this->addToContainerLF(std::move(obj));
+            auto& obj = it->second;
+
+            auto now = std::chrono::system_clock::now();
+
+            std::chrono::duration<double> duration = obj.first - now;
+
+            if (std::abs(duration.count()) > 10) {
+                std::cout << "add to conainer once more time" << std::endl;
+                this->addToContainerLF(std::move(obj.second->clone()));
+                continue;
+            }
+            std::cout << "Time didn't come yet " <<  duration.count() << std::endl;
         }
     }
 
@@ -48,12 +59,10 @@ public:
     std::thread reSender(int timeout) {
         return std::thread([this, timeout]() {
             while(true) {
+                std::cout << "Resend" << std::endl;
                 {
-                    std::cout << "ReSender" << std::endl;
                     std::scoped_lock lock(*this->buffer_m, *this->container_m);
-                    std::cout << "ReSender blocked" << std::endl;
                     moveFromWindowToContainer();
-                    std::cout << "ReSender unblocked" << std::endl;
                 }
                 std::this_thread::sleep_for(std::chrono::seconds(timeout));
             }

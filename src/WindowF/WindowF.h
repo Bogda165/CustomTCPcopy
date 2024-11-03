@@ -2,6 +2,7 @@
 #ifndef PKS_PROJECT_WINDOWF_H
 #define PKS_PROJECT_WINDOWF_H
 #include <functional>
+#include <chrono>
 #include <unordered_map>
 #include <iostream>
 #include <vector>
@@ -9,6 +10,7 @@
 #include <memory>
 #include <stdexcept>
 #include "../Exceptions/out_of_range_exception.h"
+using tp = std::chrono::system_clock::time_point;
 
 template<typename HUI>
 struct Comporator {
@@ -22,7 +24,7 @@ class WindowF {
 
 protected:
 
-    std::unique_ptr<std::unordered_map<int, std::unique_ptr<T>>> buffer;
+    std::unique_ptr<std::unordered_map<int, std::pair<tp, std::unique_ptr<T>>>> buffer;
     std::unique_ptr<std::mutex> buffer_m;
     std::shared_ptr<std::pair<int, int>> indexes;
     std::shared_ptr<std::mutex> indexes_m;
@@ -32,13 +34,13 @@ protected:
 public:
 
     static int max_buffer_size;
-    WindowF(): buffer(std::make_unique<std::unordered_map<int, std::unique_ptr<T>>>()),
-               buffer_m(std::make_unique<std::mutex>()),
-               indexes_b(std::make_unique<std::priority_queue<int, std::vector<int>, Comporator<int>>>()),
-               indexes_b_m(std::make_unique<std::mutex>()),
-               indexes(std::make_shared<std::pair<int, int>>(0, max_buffer_size)),
-               indexes_m(std::make_shared<std::mutex>()) {
-
+    WindowF()
+            : buffer(std::make_unique<std::unordered_map<int, std::pair<tp, std::unique_ptr<T>>>>()),
+              buffer_m(std::make_unique<std::mutex>()),
+              indexes_b(std::make_unique<std::priority_queue<int, std::vector<int>, Comporator<int>>>()),
+              indexes_b_m(std::make_unique<std::mutex>()),
+              indexes(std::make_shared<std::pair<int, int>>(0, max_buffer_size)),
+              indexes_m(std::make_shared<std::mutex>()) {
     }
 
     OUT_OF_RANGE whichOutOfRangeLF (int seq_n) {
@@ -71,7 +73,7 @@ public:
             return;
         }if (seq_n >= indexes->first && seq_n <= indexes->second) {
             if (buffer->find(seq_n) == buffer->end()) {
-                buffer->insert(std::make_pair(seq_n, std::move(obj)));
+                buffer->insert(std::make_pair(seq_n, std::make_pair(std::chrono::system_clock::now(), std::move(obj))));
             }else {
                 std::cout << "The value was already in the window" << std::endl;
             }
@@ -97,7 +99,7 @@ public:
         if (seq_n >= indexes->first && seq_n < indexes->second) {
             auto it = buffer->find(seq_n);
             if (it != buffer->end()) {
-                auto obj = std::move(it->second);
+                auto obj = std::move(it->second.second);
                 buffer->erase(it);
 
                 indexes_b->push(seq_n);
