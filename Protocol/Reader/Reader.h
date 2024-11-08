@@ -7,6 +7,7 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <thread>
 
 class Reader {
 public:
@@ -22,7 +23,7 @@ protected:
     virtual void moveBufferImpl() = 0; //free the buffer, and offset
 public:
 
-    Reader(std::unique_ptr<std::istream> inputStream) : input_s(std::move(inputStream)), id(-1), offset(0) {
+    Reader(std::unique_ptr<std::istream> inputStream, int _id) : input_s(std::move(inputStream)), id(_id), offset(0) {
     }
 
     void fallBack() {
@@ -32,6 +33,7 @@ public:
     void moveBuffer() {
         moveBufferImpl();
         fallBack();
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 
     bool readBuffer() {
@@ -66,11 +68,30 @@ public:
         return is_the_end;
     }
 
+    void read() {
+        while(!readBuffer()) {
+
+        }
+        moveBuffer();
+    }
+
 
     bool isGood() const {
         return input_s->good();
     }
 
+    int getId() const {
+        return id;
+    }
+
+    std::string getString() const {
+        return std::string(reinterpret_cast<const char*>(buffer), offset);
+    }
+
+    std::vector<uint8_t> getBuffer() const {
+        std::vector<uint8_t> _buffer(buffer, buffer + offset);
+        return _buffer;
+    }
 };
 
 

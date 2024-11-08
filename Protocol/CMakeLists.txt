@@ -1,51 +1,53 @@
 cmake_minimum_required(VERSION 3.29)
-project(Pks_project)
 
-enable_testing()
+# Define the Protocol library
+add_library(Protocol STATIC
+        Socket/MySocket.cpp
+        Socket/MySocket.h
+        Data/data.cpp
+        Data/data.h
+        Socket/header.cpp
+        Socket/header.h
+        Receivers/receiver.cpp
+        Receivers/receiver.h
+        Receivers/myReceiver.cpp
+        Receivers/myReceiver.h
+        Socket/HandShakeStats.cpp
+        Socket/HandShakeStats.h
+        Packet/Packet.cpp
+        Packet/Packet.h
+        WindowF/WindowF.cpp
+        WindowF/WindowF.h
+        WindowF/MyWindow.cpp
+        WindowF/MyWindow.h
+        Sendable/Sendable.cpp
+        Sendable/Sendable.h
+        Sender/Sender.cpp
+        Sender/Sender.h
+        Exceptions/out_of_range_exception.cpp
+        Exceptions/out_of_range_exception.h
+        Reader/Reader.cpp
+        Reader/Reader.h
+        Reader/MyReader.cpp
+        Reader/MyReader.h
+        Data/data_i.cpp
+        Data/data_i.h
+        # Add other Protocol-specific source files here if necessary
+)
 
-set(CMAKE_CXX_STANDARD 20)
-
+# Link Boost if needed by Protocol
 find_package(Boost 1.70 REQUIRED COMPONENTS system)
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost not found!")
 endif()
 
-include_directories(${Boost_INCLUDE_DIRS})
+# Include Boost headers and other needed directories
+target_include_directories(Protocol PRIVATE ${Boost_INCLUDE_DIRS})
+target_include_directories(Protocol PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Reader ${CMAKE_CURRENT_SOURCE_DIR}/Socket)
+target_link_libraries(Protocol PRIVATE ${Boost_LIBRARIES})
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
-add_executable(Pks_project src/main.cpp
-        src/Socket/MySocket.cpp
-        src/Socket/MySocket.h
-        src/Data/data.cpp
-        src/Data/data.h
-        src/Socket/header.cpp
-        src/Socket/header.h
-        src/Receivers/receiver.cpp
-        src/Receivers/receiver.h
-        src/Receivers/myReceiver.cpp
-        src/Receivers/myReceiver.h
-        src/Socket/HandShakeStats.cpp
-        src/Socket/HandShakeStats.h
-        src/Packet/Packet.cpp
-        src/Packet/Packet.h
-        src/WindowF/WindowF.cpp
-        src/WindowF/WindowF.h
-        src/WindowF/MyWindow.cpp
-        src/WindowF/MyWindow.h
-        src/Sendable/Sendable.cpp
-        src/Sendable/Sendable.h
-        src/Sender/Sender.cpp
-        src/Sender/Sender.h
-        src/Exceptions/out_of_range_exception.cpp
-        src/Exceptions/out_of_range_exception.h
-        src/Reader/Reader.cpp
-        src/Reader/Reader.h
-        src/Reader/MyReader.cpp
-        src/Reader/MyReader.h)
-
-target_link_libraries(Pks_project ${Boost_LIBRARIES})
-
-add_subdirectory(Tests)
-add_subdirectory(ReaderProcess)
+# Set the output directory for the Protocol library
+set_target_properties(Protocol PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+)

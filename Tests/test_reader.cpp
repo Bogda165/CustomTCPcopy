@@ -16,7 +16,3 @@ TEST(ReaderTests, test2) {
     EXPECT_EQ(a, 27);
 }
 
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}

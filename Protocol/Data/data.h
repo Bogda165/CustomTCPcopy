@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include "../Packet/Packet.h"
+#include "data_i.h"
 
 enum class data_type {
     VEC,
@@ -19,21 +20,17 @@ enum class status {
     FILLED,
 };
 
-class Data {
+class Data: public Data_i<std::vector<uint8_t>> {
 private:
     data_type type;
-    //vector of data
-    std::vector<uint8_t> buffer;
     // file of data
     std::fstream buffer_f;
     //buffer status
     status buffer_s;
-    //the length of the data, each time something added to a buffer, check if data_len greather then n, change it
-    int data_len;
-
-    static int chunk_len;
 
     static int max_buffer_len;
+
+    std::vector<int> indexes_b;
 
     //offset for the last buffer from the rigth side
     int offset;
@@ -46,10 +43,6 @@ public:
 
     const std::fstream &getBufferF() const;
 
-    int getChunkLen() const;
-
-    void setChunkLen(int chunkLen);
-
     int getMaxBufferLen() const;
 
     void setMaxBufferLen(int maxBufferLen);
@@ -58,9 +51,7 @@ public:
 
     status getBufferStatus() const;
 
-    int getDataLength() const;
-
-    std::vector<uint8_t> getData();
+    std::vector<uint8_t> getData() override;
 
     Data();
 
@@ -73,18 +64,23 @@ public:
     //chunks length should be the same
     void insertChunk(int n, std::vector<uint8_t> chunk);
 
-    void addChunk(int n, std::vector<uint8_t> chunk);
+    void addChunk(int n, std::vector<uint8_t> chunk) override;
 
     void addChunk(int n, std::string chunk);
-
-    void show() const;
 
     void show_data();
 
     std::string toString();
 
-    std::vector<std::vector<uint8_t>> getDataByPackets();
+    std::vector<std::vector<uint8_t>> getDataByPackets() override;
 
+    void addIndex(int index);
+
+    std::vector<int> getIndexesBuffer();
+
+    void fromChunkVec(std::vector<uint8_t> buffer);
+
+    void fromString(std::string str);
 };
 
 

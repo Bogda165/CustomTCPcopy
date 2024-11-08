@@ -28,21 +28,6 @@ void Data::insertChunk(int n, std::vector<uint8_t> chunk) {
     }
 }
 
-void Data::show() const {
-    if (type == data_type::VEC) {
-        for (auto i: buffer) {
-            std::cout << static_cast<int>(i) << " ";
-        }
-        std::cout << std::endl;
-    }else {
-        //implement for file
-    }
-}
-
-int Data::getDataLength() const {
-    return data_len * chunk_len;
-}
-
 data_type Data::getType() const {
     return type;
 }
@@ -55,17 +40,6 @@ const std::fstream &Data::getBufferF() const {
     return buffer_f;
 }
 
-int Data::getChunkLen() const {
-    return chunk_len;
-}
-
-void Data::setChunkLen(int chunkLen) {
-    if (buffer_s == status::FILLED) {
-        throw std::runtime_error("Trying to change value, while buffer is filled, clear the buffer first");
-    }
-
-    chunk_len = chunkLen;
-}
 
 int Data::getMaxBufferLen() const {
     return max_buffer_len;
@@ -184,6 +158,20 @@ Data::Data(std::string str): Data() {
     this->addChunk(n, _str);
 }
 
+void Data::fromString(std::string str){
+
+    int n = str.length() / this->getChunkLen();
+
+    for (int i = 0; i < n; i++) {
+        std::string _str = str.substr(i * this->getChunkLen(), this->getChunkLen());
+        std::cout << _str << ":> " <<_str.length() << std::endl;
+        this->addChunk(i, _str);
+    }
+    std::string _str = str.substr(n * this->getChunkLen(), str.length() % this->getChunkLen());
+    std::cout << _str << ":> " <<_str.length() << std::endl;
+    this->addChunk(n, _str);
+}
+
 std::string Data::toString() {
     auto _buffer = this->getData();
     std::string str(_buffer.begin(), _buffer.end());
@@ -198,4 +186,22 @@ Data::Data(std::vector<uint8_t> buffer): Data() {
         this->addChunk(i, std::move(std::vector(buffer.begin() + i * this->getChunkLen(), buffer.begin() + (i + 1) * this->getChunkLen())));
     }
     this->addChunk(n, std::move(std::vector(buffer.begin() + n * this->getChunkLen(), buffer.end())));
+}
+
+void Data::fromChunkVec(std::vector<uint8_t> buffer) {
+    int n = buffer.size() / this->getChunkLen();
+
+    for (int i = 0; i < n; i++) {
+        this->addChunk(i, std::move(std::vector(buffer.begin() + i * this->getChunkLen(), buffer.begin() + (i + 1) * this->getChunkLen())));
+    }
+    this->addChunk(n, std::move(std::vector(buffer.begin() + n * this->getChunkLen(), buffer.end())));
+}
+
+
+void Data::addIndex(int index) {
+    indexes_b.push_back(index);
+}
+
+std::vector<int> Data::getIndexesBuffer() {
+    return std::move(this->indexes_b);
 }
