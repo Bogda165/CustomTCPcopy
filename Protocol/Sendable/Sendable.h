@@ -19,6 +19,10 @@ public:
     bool operator==(const Sendable& other) const {
         return this->getSequenceNumber() == other.getSequenceNumber();
     }
+    
+    virtual ~Sendable() {
+        
+    }
 };
 
 

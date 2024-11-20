@@ -1,8 +1,8 @@
 #include <iostream>
 #include <memory>
 #include <Reader/MyReader.h>
-#include <stdexcept> // For std::invalid_argument and std::out_of_range
-
+#include <chrono>
+#include <stdexcept>
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << "No integer argument provided!" << std::endl;
@@ -22,6 +22,8 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << "Received integer: " << id << std::endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 
     std::unique_ptr<std::istream> inputStream = std::make_unique<std::istream>(std::cin.rdbuf());
     MyReader reader(std::move(inputStream), id, "fifo" + std::to_string(id));

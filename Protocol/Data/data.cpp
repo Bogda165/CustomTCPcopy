@@ -105,7 +105,7 @@ void Data::addChunk(int n, std::string chunk) {
     this->insertChunk(n, _buffer);
 }
 
-std::vector<uint8_t> Data::getData(){
+std::vector<uint8_t> Data::getData() const{
     if (type == data_type::VEC) {
         auto _vec = std::vector<uint8_t>();
 
@@ -134,9 +134,7 @@ std::vector<std::vector<uint8_t>> Data::getDataByPackets() {
 }
 
 
-
-
-void Data::show_data() {
+void Data::show() const {
     for (auto i: this->getData()) {
         std::cout << static_cast<int>(i) << " ";
     }
@@ -204,4 +202,13 @@ void Data::addIndex(int index) {
 
 std::vector<int> Data::getIndexesBuffer() {
     return std::move(this->indexes_b);
+}
+
+void Data::forEachPacket(std::function<void(std::vector<uint8_t>, int)> func) {
+    auto packets = this->getDataByPackets();
+    int packet_id = 0;
+    for (auto packet: packets) {
+        func(std::move(packet), packet_id);
+        packet_id ++;
+    }
 }

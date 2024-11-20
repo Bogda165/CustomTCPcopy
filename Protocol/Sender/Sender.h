@@ -124,18 +124,18 @@ public:
                         continue;
                         break;
                     case OUT_OF_RANGE::RIGHT:
-                        std::cout << "Skipped" << std::endl;
+                        //std::cout << "Skipped" << std::endl;
                         skipLF();
                         continue;
                         break;
                     case OUT_OF_RANGE::IN:
                         std::cout << "Sending a packet" << std::endl;
-                        packet_b = std::move(getFromContainerLF());
+                        packet_b = getFromContainerLF();
                         break;
                 }
             }
-
-            sendTo(endpoint, std::move(packet_b->toU8()));
+            auto packet_b_u8 = packet_b->toU8();
+            sendTo(endpoint, std::move(packet_b_u8));
         }
         skipped = 0;
     }
@@ -160,12 +160,12 @@ public:
                         std::lock_guard<std::mutex> lock(*endpoint.second);
                         _endpoint = *endpoint.first;
                     }
-                    std::cout << "Send to every" << std::endl;
+                    //std::cout << "Send to every" << std::endl;
                     this->sendToEvery(_endpoint);
                     // add to container from window
 
                     // Exit condition could be added here for controlled termination if needed
-                    std::this_thread::sleep_for(std::chrono::seconds(interval_seconds));
+                    //std::this_thread::sleep_for(std::chrono::seconds(interval_seconds));
                 }
             } catch (const std::exception& e) {
                 std::cerr << "Exception in thread: " << e.what() << std::endl;

@@ -10,10 +10,15 @@
 #include <iostream>
 #include <Packet/Packet.h>
 
-template<typename Buffer>
+template <typename Buffer, typename Value, typename Key = int, typename Packet = Value>
 class Data_i {
-    static_assert(std::is_same<typename std::iterator_traits<typename Buffer::iterator>::value_type, uint8_t>::value,
-                  "Container must hold uint_8");
+    static_assert(
+            //std::is_same<typename std::iterator_traits<typename Buffer::iterator>::value_type, Value>::value ||
+            std::is_same<Value, uint8_t>::value ||
+            // Ensure Value is a std::pair<Key, std::vector<uint8_t>>
+            (std::is_same<Value, std::pair<Key, std::vector<uint8_t>>>::value),
+            "Container must hold uint8_t or std::pair<Key, std::vector<uint8_t>>"
+    );
 
 protected:
     static int chunk_len;
@@ -23,7 +28,7 @@ protected:
 
 public:
     Data_i() {
-        buffer = std::vector<uint8_t>();
+        buffer = Buffer();
         data_len = 0;
     }
 
@@ -35,25 +40,19 @@ public:
         return data_len;
     }
 
-    virtual std::vector<uint8_t> getData() = 0;
+    virtual std::vector<uint8_t> getData() const = 0;
     virtual void addChunk(int n, std::vector<uint8_t> chunk) = 0;
-    virtual std::vector<std::vector<uint8_t>> getDataByPackets() = 0;
+    virtual std::vector<Packet> getDataByPackets() = 0;
 
-    void forEachPacket(std::function<void(std::vector<uint8_t>, int)> func) {
-        auto packets = this->getDataByPackets();
-        int packet_id = 0;
-        for (auto packet: packets) {
-            func(std::move(packet), packet_id);
-            packet_id ++;
-        }
-    }
+    virtual void forEachPacket(std::function<void(std::vector<uint8_t>, int)> func) = 0;
 
-    virtual void show() const {
-        for (auto i: buffer) {
-            std::cout << static_cast<int>(i) << " ";
-        }
-    }
+    virtual void show() const = 0;
+
+    virtual ~Data_i() = default;
 };
+
+template <typename Buffer, typename Value, typename Key, typename Packet>
+int Data_i<Buffer, Value, Key, Packet>::chunk_len = 800;
 
 
 #endif //PKS_PROJECT_DATA_I_H

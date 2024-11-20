@@ -66,6 +66,17 @@ public:
 
     }
 
+    void calibrateIndexesLF () {
+        int temp = 0;
+
+        while (!indexes_b->empty() && indexes_b->top() == indexes->first) {
+            indexes_b->pop();
+            indexes->first += 1;
+        }
+
+        indexes->second = indexes->first + max_buffer_size;
+    }
+
     void addToBuffer(int seq_n, std::unique_ptr<T> obj) {
         std::scoped_lock lock(*indexes_m, *buffer_m);
         if(seq_n < 0) {
@@ -84,9 +95,7 @@ public:
     }
 
     std::unique_ptr<T> getFromBuffer(int seq_n) {
-        std::unique_lock lock(*indexes_m);
-        std::unique_lock lock3(*indexes_b_m);
-        std::unique_lock<std::mutex> lock2(*buffer_m);
+        std::scoped_lock lock(*indexes_m, *indexes_b_m, *buffer_m);
 
         auto type = whichOutOfRangeLF(seq_n);
 
@@ -103,10 +112,7 @@ public:
                 buffer->erase(it);
 
                 indexes_b->push(seq_n);
-                lock.unlock();
-                lock2.unlock();
-                lock3.unlock();
-                this->calibrateIndexes();
+                this->calibrateIndexesLF();
 
                 return std::move(obj);
             }

@@ -20,7 +20,7 @@ enum class status {
     FILLED,
 };
 
-class Data: public Data_i<std::vector<uint8_t>> {
+class Data: public Data_i<std::vector<uint8_t>, uint8_t, int, std::vector<uint8_t>> {
 private:
     data_type type;
     // file of data
@@ -35,9 +35,34 @@ private:
     //offset for the last buffer from the rigth side
     int offset;
 public:
+
+    // Move constructor
+    Data(Data&& other) noexcept
+            : Data_i(std::move(other)), type(std::move(other.type)), buffer_f(std::move(other.buffer_f)),
+              buffer_s(std::move(other.buffer_s)), indexes_b(std::move(other.indexes_b)), offset(other.offset) {
+        // Move the buffer
+        buffer = std::move(other.buffer);
+    }
+
+    Data& operator=(Data&& other) noexcept {
+        if (this != &other) {
+            Data_i::operator=(std::move(other));
+            type = std::move(other.type);
+            buffer_f = std::move(other.buffer_f);
+            buffer_s = std::move(other.buffer_s);
+            indexes_b = std::move(other.indexes_b);
+            offset = other.offset;
+            buffer = std::move(other.buffer);
+        }
+        return *this;
+    }
+
+    Data(const Data&) = delete;
+    Data& operator=(const Data&) = delete;
+
     data_type getType() const;
 
-    void setType(data_type type);
+    void setType (data_type type);
 
     const std::vector<uint8_t> &getBuffer() const;
 
@@ -51,7 +76,7 @@ public:
 
     status getBufferStatus() const;
 
-    std::vector<uint8_t> getData() override;
+    std::vector<uint8_t> getData() const override;
 
     Data();
 
@@ -68,7 +93,7 @@ public:
 
     void addChunk(int n, std::string chunk);
 
-    void show_data();
+    void show() const override;
 
     std::string toString();
 
@@ -81,6 +106,12 @@ public:
     void fromChunkVec(std::vector<uint8_t> buffer);
 
     void fromString(std::string str);
+
+    void forEachPacket(std::function<void(std::vector<uint8_t>, int)> func) override;
+
+    ~Data() {
+        indexes_b.clear();
+    }
 };
 
 

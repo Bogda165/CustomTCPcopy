@@ -35,14 +35,14 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     socket_m = std::make_shared<std::mutex>();
 
     // Creating a messages hash map
-    messages = std::make_shared<std::unordered_map<int, std::pair<Header, Data>>>();
+    messages = std::make_shared<std::unordered_map<int, std::pair<Header, std::variant<Data, FileData>>>>();
     messages_m = std::make_shared<std::mutex>();
 
     handShake = std::make_shared<HandShakeStats>(socket, socket_m);
     handShake_m = std::make_shared<std::mutex>();
 
-    auto hui = this->runSender(handShake->getEndpoint(), 10);
-    auto hui2 = this->reSender(10);
+    auto hui = this->runSender(handShake->getEndpoint(), 1);
+    auto hui2 = this->reSender(1);
 
     hui.detach();
     hui2.detach();
@@ -83,12 +83,13 @@ std::pair<std::shared_ptr<HandShakeStats>, std::shared_ptr<std::mutex>> MySocket
     return std::make_pair(handShake, handShake_m);
 }
 
-std::pair<std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>>, std::shared_ptr<std::mutex>> MySocket::getMessages() {
+std::pair<std::shared_ptr<std::unordered_map<int, std::pair<Header, std::variant<Data, FileData>>>>, std::shared_ptr<std::mutex>> MySocket::getMessages() {
     return std::make_pair(messages, messages_m);
 }
 
 void MySocket::addToContainerLF(std::unique_ptr<Sendable> obj) {
-    if (!isInContainerLF(std::move(obj->clone()))) {
+    auto cloned_obj = obj->clone();
+    if (!isInContainerLF(std::move(cloned_obj))) {
         container->push_back(std::move(obj));
     }else {
         std::cout << "The value is already in container!!!" << std::endl;
@@ -138,7 +139,8 @@ void MySocket::showMessages() const {
         std::cout << "Key" << key.first;
 
         std::cout << "Data: ";
-        key.second.second.show();
+        auto& data = key.second.second;
+        std::visit([](auto& data){data.show();}, data);
     }
     std::cout << std::endl;
 }

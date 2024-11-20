@@ -5,7 +5,7 @@
 #ifndef PKS_PROJECT_PACKET_H
 #define PKS_PROJECT_PACKET_H
 
-#include "../Socket/header.h"
+#include "header.h"
 #include "../Sendable/Sendable.h"
 
 class Packet: public Sendable {
@@ -31,6 +31,8 @@ public:
     }
 
     static std::vector<Packet> fromBuffer(std::vector<uint8_t> buffer);
+
+    ~Packet() = default;
 };
 
 

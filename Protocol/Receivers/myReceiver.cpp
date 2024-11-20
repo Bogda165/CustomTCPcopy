@@ -31,7 +31,7 @@ bool MyReceiver::onReceive() {
     auto packet = std::make_unique<Packet>();
     packet->fromU8(std::vector(recv_buffer.begin(), recv_buffer.begin() + length));
 
-    packet->show();
+    //packet->show();
 
     auto header = std::make_unique<Header>(packet->getHeader());
 
@@ -47,7 +47,7 @@ bool MyReceiver::onReceive() {
     auto messages_m = messages_p.second;
 
     //if Hand shake
-    if (header->getFlags(Flags::ACK) || header->getFlags(Flags::SYN)) {
+     if (header->getFlags(Flags::ACK) || header->getFlags(Flags::SYN)) {
         std::lock_guard<std::mutex> lock(*handShake_m);
         std::cout << "Process handshake" << std::endl;
         handShake->handleHandShake(std::move(header), sender_endpoint);
@@ -63,7 +63,8 @@ bool MyReceiver::onReceive() {
         }
         std::cout << "Recv ack for " << header->getMessageId() << ": " << header->getPacketId() << std::endl;
         return true;
-    } else {
+
+    }else {
         std::cout << "Process message" << std::endl;
         // just a usual message
         //get message id
@@ -76,12 +77,25 @@ bool MyReceiver::onReceive() {
             auto message = messages->find(message_id);
             if (message == messages->end()) {
                 // if not exist create a new message and data
-                Data data = Data();
-                data.addChunk(header->getPacketId(), data_b);
-                data.show_data();
+                std::variant<Data, FileData> data;
+
+                if (header->getFlags(Flags::FILE)) {
+                    data = FileData();
+                } else {
+                    data = Data();
+                }
+
+                std::visit([&](auto& d) {
+                    d.addChunk(header->getPacketId(), data_b);
+                    //d.show();
+                }, data);
+
+
                 messages->insert(std::make_pair(message_id, std::make_pair(*header.release(), std::move(data))));
+
             }else {
-                message->second.second.addChunk(header->getPacketId(), data_b);
+                auto& _data = message->second.second;
+                std::visit([&data_b, &header](auto& data){data.addChunk(header->getPacketId(), data_b);}, _data);
             }
         }
 

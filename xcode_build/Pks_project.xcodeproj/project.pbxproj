@@ -1,0 +1,1548 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1C81BE17B0C4A329A43056D2 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = BF1421F7061743719B4F5F79 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				C4E680558469C6FBA80D8EFC /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				EC4390178C0347319F1FB295 /* PBXTargetDependency */,
+				91DBD97ED34F43B4ADB52453 /* PBXTargetDependency */,
+				5681FA735DD04C1085B4D23C /* PBXTargetDependency */,
+				C61FF8F891DD44C9B40CAE27 /* PBXTargetDependency */,
+				B333057112784C41868FFD51 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		996858F280E036ABBEB3633B /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = BB80CA0B99794D4B9CC352B1 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				29E6F51C28A8730F42348086 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		1BB67D51E32740F19B02D1D7 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.cpp */ = {isa = PBXBuildFile; fileRef = 65536598375840979A53281C /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.cpp */; };
+		28953384834146679BE27084 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.h */ = {isa = PBXBuildFile; fileRef = 535B2D411E36480AB043FE39 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.h */; };
+		3BEBF64DFBD84F0086146D7A /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.h */ = {isa = PBXBuildFile; fileRef = F7A74C1142DE41639B582A47 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.h */; };
+		3F70B373C5A048A0B184DAF0 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.h */ = {isa = PBXBuildFile; fileRef = 70811DD3E9A9443EB6D9B0BF /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.h */; };
+		44626E16BC1543C28B610BF0 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.cpp */ = {isa = PBXBuildFile; fileRef = AFDFEFCDA2C741ACAE8D9C6D /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.cpp */; };
+		46397FEE8D13459E9940D1DC /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.h */ = {isa = PBXBuildFile; fileRef = 397600DB486644C1927D62E9 /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.h */; };
+		57A3EC6B28AD47D39E3EC0CF /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.h */ = {isa = PBXBuildFile; fileRef = BFA600EABB9D43ECB273AF6D /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.h */; };
+		65A657DFA139464ABECF6957 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.cpp */ = {isa = PBXBuildFile; fileRef = 4FFD5A9FB32042CBA8F1C503 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.cpp */; };
+		671AE6FF22084E26B62FB4B1 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.cpp */ = {isa = PBXBuildFile; fileRef = F04FC2C460FB4729AE9C9F41 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.cpp */; };
+		70AAA44706B84B42BC963146 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.cpp */ = {isa = PBXBuildFile; fileRef = 2108F9D82D164723820F569D /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.cpp */; };
+		8206AEA4E36448B3A6B852C2 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.cpp */ = {isa = PBXBuildFile; fileRef = A66EF02F3DCB4C8E90B86C7E /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.cpp */; };
+		87BF5174BB484298B70A18F9 /* /Users/user/CLionProjects/Pks_project/ReaderProcess/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 8B5A17204BA84B7DA1828951 /* /Users/user/CLionProjects/Pks_project/ReaderProcess/CMakeLists.txt */; };
+		88FEC839DCF64EE8BE2134E1 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.h */ = {isa = PBXBuildFile; fileRef = B706DB072D6649658CAAA6E5 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.h */; };
+		890336C859BB4122A1887710 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.h */ = {isa = PBXBuildFile; fileRef = E501AB129E564D208685BBA8 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.h */; };
+		895A172DAC2E4B4DA688CD3B /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.h */ = {isa = PBXBuildFile; fileRef = 3867B83BE0534169B4183CFF /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.h */; };
+		8BF27005AA0649DBB601EA73 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.h */ = {isa = PBXBuildFile; fileRef = 8B1EB19BEE3E4179AEA3ACD8 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.h */; };
+		8FEF6C7C63794A70BD511126 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.h */ = {isa = PBXBuildFile; fileRef = F2D99DA37AC2492B8369B780 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.h */; };
+		91372B5DDF8841E793DF3E8E /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.h */ = {isa = PBXBuildFile; fileRef = 4B943EF0B9FE40019060370A /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.h */; };
+		91DC693B05F84070878C179F /* /Users/user/CLionProjects/Pks_project/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 65C87B27B97845E1917D32FB /* /Users/user/CLionProjects/Pks_project/CMakeLists.txt */; };
+		93062F77F6A542CCB2AAB682 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.cpp */ = {isa = PBXBuildFile; fileRef = 1FF7255B65DB456480AD6C8F /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.cpp */; };
+		A5688A12341A42ED9FA55FCE /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.cpp */ = {isa = PBXBuildFile; fileRef = C4725CAB03E54899B0B93591 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.cpp */; };
+		AD3DF99C72664E6CA3E955A6 /* /Users/user/CLionProjects/Pks_project/src/main.cpp */ = {isa = PBXBuildFile; fileRef = E0CB2CD89FFB4C349D65E29C /* /Users/user/CLionProjects/Pks_project/src/main.cpp */; };
+		AFDE514C7FB94162961285A0 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.cpp */ = {isa = PBXBuildFile; fileRef = E7571EE569E944BF8873EFD3 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.cpp */; };
+		BCCC5C7641E24F8E99AA08A5 /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.h */ = {isa = PBXBuildFile; fileRef = 145EC880429C47D3980F23DA /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.h */; };
+		C12E6BFC791F4428B3924817 /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.cpp */ = {isa = PBXBuildFile; fileRef = D19EE31234954DD1A1616AE8 /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.cpp */; };
+		C9F458DB5DF945BC908F372B /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.cpp */ = {isa = PBXBuildFile; fileRef = 6367737195424C298D75D37A /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.cpp */; };
+		CA4429439792475DA6B5F2FB /* /Users/user/CLionProjects/Pks_project/Protocol/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 1B065B01A89349C2B9B24B38 /* /Users/user/CLionProjects/Pks_project/Protocol/CMakeLists.txt */; };
+		CDF2A2FB910A47D1894B1C36 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.cpp */ = {isa = PBXBuildFile; fileRef = 977DF9FCD25943CCB1BD4FB2 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.cpp */; };
+		D303930CF9D344718198BA97 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.h */ = {isa = PBXBuildFile; fileRef = 61AA8CF0274F4E3ABFF14DD5 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.h */; };
+		D3758BDE0EF94102B8D89462 /* /Users/user/CLionProjects/Pks_project/OutputProcess/writer.cpp */ = {isa = PBXBuildFile; fileRef = 409F765037CC4F4D9A00CDA3 /* /Users/user/CLionProjects/Pks_project/OutputProcess/writer.cpp */; };
+		D3EE448EB5874D2299901B58 /* /Users/user/CLionProjects/Pks_project/OutputProcess/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = F196AC9E100147F7800F167A /* /Users/user/CLionProjects/Pks_project/OutputProcess/CMakeLists.txt */; };
+		DC9F20C980794D82A8673E61 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.cpp */ = {isa = PBXBuildFile; fileRef = 1172C8E21F7340959BB324B0 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.cpp */; };
+		E07CE428C63F45B389507D99 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.h */ = {isa = PBXBuildFile; fileRef = 0756FE1B09D84F5CA9C98E10 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.h */; };
+		E98BEFE506F44673B7E0B0BB /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.cpp */ = {isa = PBXBuildFile; fileRef = AFE90F80B0754EF684C41782 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.cpp */; };
+		EA65F1F27DD9476192B26684 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.h */ = {isa = PBXBuildFile; fileRef = 93C74825BEFA431EAA166208 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.h */; };
+		F0B85619F443456E90AF7F7D /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.h */ = {isa = PBXBuildFile; fileRef = 0EE985280B1B42579FAB907C /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.h */; };
+		F1BE43649E444338A43780BF /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.cpp */ = {isa = PBXBuildFile; fileRef = 96CE8F718E6C474892D4EE66 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.cpp */; };
+		F92FC4E563E240649227929B /* /Users/user/CLionProjects/Pks_project/ReaderProcess/reader.cpp */ = {isa = PBXBuildFile; fileRef = 585D18E1041F4A5DB7EC8BA1 /* /Users/user/CLionProjects/Pks_project/ReaderProcess/reader.cpp */; };
+		FE24BAEA8C3E40F68A093977 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.h */ = {isa = PBXBuildFile; fileRef = 6E483E34E9DE4E4586A84256 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.h */; };
+		FFA137218B494408ACBF2D32 /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.cpp */ = {isa = PBXBuildFile; fileRef = 7B8D73C093C1450EBEFE0BD3 /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.cpp */; };
+		FFD034A48A05436CB66B3E95 /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.cpp */ = {isa = PBXBuildFile; fileRef = C0C10B2B540849F9A93EE24F /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		3D9C228011044F8582BBEBE7 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		7B6E79A32D9E4819A547327C /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		C968E2C56C2143DE95E1D4F4 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		CDC2F4B12B374BB48BC55096 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		05C919F0FF6343A29DA6E318 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0FE6373D1B3E5FF21539B1E;
+			remoteInfo = Protocol;
+		};
+		1E05EDAFAC0E46CD931952BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 996858F280E036ABBEB3633B;
+			remoteInfo = ZERO_CHECK;
+		};
+		4E8585DE589049DA82AD7CAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69E269866CD2FF7854EB70DB;
+			remoteInfo = OutputProcess;
+		};
+		5CB3A3B877B7488AB3FC5DFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 09180B84A58F0F386124BCEE;
+			remoteInfo = main;
+		};
+		6268ADF3FDB3435AA9060590 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 996858F280E036ABBEB3633B;
+			remoteInfo = ZERO_CHECK;
+		};
+		66B0EDA542604475B4B953EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0A2DE2C1CC9D09FFB747A74;
+			remoteInfo = ReaderProcess;
+		};
+		70DE402DA4444BB3B1940346 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0FE6373D1B3E5FF21539B1E;
+			remoteInfo = Protocol;
+		};
+		861E69672564405AB039769C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 996858F280E036ABBEB3633B;
+			remoteInfo = ZERO_CHECK;
+		};
+		86794AD8360A442783242530 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69E269866CD2FF7854EB70DB;
+			remoteInfo = OutputProcess;
+		};
+		A7100E34B7464B7EB8ABBB8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0A2DE2C1CC9D09FFB747A74;
+			remoteInfo = ReaderProcess;
+		};
+		B2108ADA4DF64E58B80BADE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 996858F280E036ABBEB3633B;
+			remoteInfo = ZERO_CHECK;
+		};
+		DD2DDEF026784666866FC964 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 996858F280E036ABBEB3633B;
+			remoteInfo = ZERO_CHECK;
+		};
+		EAC5BDA5885047A1B3DB05C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0FE6373D1B3E5FF21539B1E;
+			remoteInfo = Protocol;
+		};
+		ED56DA6F331E436CAA409F97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A7D2A218784F1BB3891E4E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0FE6373D1B3E5FF21539B1E;
+			remoteInfo = Protocol;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0756FE1B09D84F5CA9C98E10 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = receiver.h; path = Protocol/Receivers/receiver.h; sourceTree = SOURCE_ROOT; };
+		0DDE0D53E8DC4CA99D404390 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = main; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EB2BF8B42254FB593B2DDD8 /* ReaderProcess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = ReaderProcess; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EE985280B1B42579FAB907C /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = data.h; path = Protocol/Data/data.h; sourceTree = SOURCE_ROOT; };
+		1172C8E21F7340959BB324B0 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = data_i.cpp; path = Protocol/Data/data_i.cpp; sourceTree = SOURCE_ROOT; };
+		145EC880429C47D3980F23DA /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Sender.h; path = Protocol/Sender/Sender.h; sourceTree = SOURCE_ROOT; };
+		1B065B01A89349C2B9B24B38 /* /Users/user/CLionProjects/Pks_project/Protocol/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = Protocol/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		1FF7255B65DB456480AD6C8F /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = HandShakeStats.cpp; path = Protocol/Socket/HandShakeStats.cpp; sourceTree = SOURCE_ROOT; };
+		2108F9D82D164723820F569D /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MyReader.cpp; path = Protocol/Reader/MyReader.cpp; sourceTree = SOURCE_ROOT; };
+		37923E75EE2D4325B9F1AB37 /* /Users/user/CLionProjects/Pks_project/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		3867B83BE0534169B4183CFF /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = HandShakeStats.h; path = Protocol/Socket/HandShakeStats.h; sourceTree = SOURCE_ROOT; };
+		397600DB486644C1927D62E9 /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Sendable.h; path = Protocol/Sendable/Sendable.h; sourceTree = SOURCE_ROOT; };
+		409F765037CC4F4D9A00CDA3 /* /Users/user/CLionProjects/Pks_project/OutputProcess/writer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = writer.cpp; path = OutputProcess/writer.cpp; sourceTree = SOURCE_ROOT; };
+		4B943EF0B9FE40019060370A /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = out_of_range_exception.h; path = Protocol/Exceptions/out_of_range_exception.h; sourceTree = SOURCE_ROOT; };
+		4FFD5A9FB32042CBA8F1C503 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Packet.cpp; path = Protocol/Packet/Packet.cpp; sourceTree = SOURCE_ROOT; };
+		535B2D411E36480AB043FE39 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MySocket.h; path = Protocol/Socket/MySocket.h; sourceTree = SOURCE_ROOT; };
+		585D18E1041F4A5DB7EC8BA1 /* /Users/user/CLionProjects/Pks_project/ReaderProcess/reader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = reader.cpp; path = ReaderProcess/reader.cpp; sourceTree = SOURCE_ROOT; };
+		61AA8CF0274F4E3ABFF14DD5 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MyWindow.h; path = Protocol/WindowF/MyWindow.h; sourceTree = SOURCE_ROOT; };
+		634E5A77D5974CA8B8D7D438 /* Protocol */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libProtocol.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6367737195424C298D75D37A /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = myReceiver.cpp; path = Protocol/Receivers/myReceiver.cpp; sourceTree = SOURCE_ROOT; };
+		65536598375840979A53281C /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = header.cpp; path = Protocol/Packet/header.cpp; sourceTree = SOURCE_ROOT; };
+		65C87B27B97845E1917D32FB /* /Users/user/CLionProjects/Pks_project/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		6E483E34E9DE4E4586A84256 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = DinamicData.h; path = Protocol/Data/DinamicData.h; sourceTree = SOURCE_ROOT; };
+		70811DD3E9A9443EB6D9B0BF /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = FileData.h; path = Protocol/Data/FileData.h; sourceTree = SOURCE_ROOT; };
+		7B8D73C093C1450EBEFE0BD3 /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = out_of_range_exception.cpp; path = Protocol/Exceptions/out_of_range_exception.cpp; sourceTree = SOURCE_ROOT; };
+		8B1EB19BEE3E4179AEA3ACD8 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Reader.h; path = Protocol/Reader/Reader.h; sourceTree = SOURCE_ROOT; };
+		8B5A17204BA84B7DA1828951 /* /Users/user/CLionProjects/Pks_project/ReaderProcess/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = ReaderProcess/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		93C74825BEFA431EAA166208 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MyReader.h; path = Protocol/Reader/MyReader.h; sourceTree = SOURCE_ROOT; };
+		96CE8F718E6C474892D4EE66 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MySocket.cpp; path = Protocol/Socket/MySocket.cpp; sourceTree = SOURCE_ROOT; };
+		977DF9FCD25943CCB1BD4FB2 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Reader.cpp; path = Protocol/Reader/Reader.cpp; sourceTree = SOURCE_ROOT; };
+		A66EF02F3DCB4C8E90B86C7E /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = FileData.cpp; path = Protocol/Data/FileData.cpp; sourceTree = SOURCE_ROOT; };
+		AFDFEFCDA2C741ACAE8D9C6D /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DinamicData.cpp; path = Protocol/Data/DinamicData.cpp; sourceTree = SOURCE_ROOT; };
+		AFE90F80B0754EF684C41782 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MyWindow.cpp; path = Protocol/WindowF/MyWindow.cpp; sourceTree = SOURCE_ROOT; };
+		B706DB072D6649658CAAA6E5 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = WindowF.h; path = Protocol/WindowF/WindowF.h; sourceTree = SOURCE_ROOT; };
+		BDB73D4C7AA24C0D95E9D18A /* OutputProcess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = OutputProcess; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFA600EABB9D43ECB273AF6D /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Packet.h; path = Protocol/Packet/Packet.h; sourceTree = SOURCE_ROOT; };
+		C0C10B2B540849F9A93EE24F /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Sendable.cpp; path = Protocol/Sendable/Sendable.cpp; sourceTree = SOURCE_ROOT; };
+		C4725CAB03E54899B0B93591 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = receiver.cpp; path = Protocol/Receivers/receiver.cpp; sourceTree = SOURCE_ROOT; };
+		D19EE31234954DD1A1616AE8 /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Sender.cpp; path = Protocol/Sender/Sender.cpp; sourceTree = SOURCE_ROOT; };
+		E0CB2CD89FFB4C349D65E29C /* /Users/user/CLionProjects/Pks_project/src/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
+		E501AB129E564D208685BBA8 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = myReceiver.h; path = Protocol/Receivers/myReceiver.h; sourceTree = SOURCE_ROOT; };
+		E7571EE569E944BF8873EFD3 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = WindowF.cpp; path = Protocol/WindowF/WindowF.cpp; sourceTree = SOURCE_ROOT; };
+		F04FC2C460FB4729AE9C9F41 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = data.cpp; path = Protocol/Data/data.cpp; sourceTree = SOURCE_ROOT; };
+		F196AC9E100147F7800F167A /* /Users/user/CLionProjects/Pks_project/OutputProcess/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = OutputProcess/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		F2D99DA37AC2492B8369B780 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = data_i.h; path = Protocol/Data/data_i.h; sourceTree = SOURCE_ROOT; };
+		F7A74C1142DE41639B582A47 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = header.h; path = Protocol/Packet/header.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0FC4182C81BA48369A9179DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E6FAB1C002749728C2EA355 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EBC9918AF5444A184AF2E16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6676A2D7418D43FE96E560C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		043DE60347674965A24CC2DA /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E483E34E9DE4E4586A84256 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.h */,
+				70811DD3E9A9443EB6D9B0BF /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.h */,
+				0EE985280B1B42579FAB907C /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.h */,
+				F2D99DA37AC2492B8369B780 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.h */,
+				4B943EF0B9FE40019060370A /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.h */,
+				BFA600EABB9D43ECB273AF6D /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.h */,
+				F7A74C1142DE41639B582A47 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.h */,
+				93C74825BEFA431EAA166208 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.h */,
+				8B1EB19BEE3E4179AEA3ACD8 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.h */,
+				E501AB129E564D208685BBA8 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.h */,
+				0756FE1B09D84F5CA9C98E10 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.h */,
+				397600DB486644C1927D62E9 /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.h */,
+				145EC880429C47D3980F23DA /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.h */,
+				3867B83BE0534169B4183CFF /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.h */,
+				535B2D411E36480AB043FE39 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.h */,
+				61AA8CF0274F4E3ABFF14DD5 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.h */,
+				B706DB072D6649658CAAA6E5 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		47119E20CE574096B626087E /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				409F765037CC4F4D9A00CDA3 /* /Users/user/CLionProjects/Pks_project/OutputProcess/writer.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		5DDF24150D5F4031A0FC536B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64EEB2802C6A4691BE6AA3A5 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				921F6AACC6A0433084B8AC98 /* CMake Rules */,
+				37923E75EE2D4325B9F1AB37 /* /Users/user/CLionProjects/Pks_project/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		8E52252D7A084E8B885BDC95 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				AFDFEFCDA2C741ACAE8D9C6D /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.cpp */,
+				A66EF02F3DCB4C8E90B86C7E /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.cpp */,
+				F04FC2C460FB4729AE9C9F41 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.cpp */,
+				1172C8E21F7340959BB324B0 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.cpp */,
+				7B8D73C093C1450EBEFE0BD3 /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.cpp */,
+				4FFD5A9FB32042CBA8F1C503 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.cpp */,
+				65536598375840979A53281C /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.cpp */,
+				2108F9D82D164723820F569D /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.cpp */,
+				977DF9FCD25943CCB1BD4FB2 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.cpp */,
+				6367737195424C298D75D37A /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.cpp */,
+				C4725CAB03E54899B0B93591 /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.cpp */,
+				C0C10B2B540849F9A93EE24F /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.cpp */,
+				D19EE31234954DD1A1616AE8 /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.cpp */,
+				1FF7255B65DB456480AD6C8F /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.cpp */,
+				96CE8F718E6C474892D4EE66 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.cpp */,
+				AFE90F80B0754EF684C41782 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.cpp */,
+				E7571EE569E944BF8873EFD3 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		921F6AACC6A0433084B8AC98 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		AA2552454F8947CFB39B951B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				8E52252D7A084E8B885BDC95 /* Source Files */,
+				043DE60347674965A24CC2DA /* Header Files */,
+				1B065B01A89349C2B9B24B38 /* /Users/user/CLionProjects/Pks_project/Protocol/CMakeLists.txt */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		B03F85D49D6B4BABB106CCC9 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				585D18E1041F4A5DB7EC8BA1 /* /Users/user/CLionProjects/Pks_project/ReaderProcess/reader.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		BBADED78967945038794699D /* main */ = {
+			isa = PBXGroup;
+			children = (
+				E214DFAEF17B4A758F420F9F /* Source Files */,
+				65C87B27B97845E1917D32FB /* /Users/user/CLionProjects/Pks_project/CMakeLists.txt */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		E09CF302FBEE4492B7D21389 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E214DFAEF17B4A758F420F9F /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				E0CB2CD89FFB4C349D65E29C /* /Users/user/CLionProjects/Pks_project/src/main.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		E57C46DA158B4DA19F98BCB3 = {
+			isa = PBXGroup;
+			children = (
+				BBADED78967945038794699D /* main */,
+				64EEB2802C6A4691BE6AA3A5 /* ALL_BUILD */,
+				AA2552454F8947CFB39B951B /* Protocol */,
+				EA66A86AC2BA4410BC67B965 /* ReaderProcess */,
+				ED9D092319F64F5B9B04F57E /* OutputProcess */,
+				EE156A574CF14CE193AF1455 /* Products */,
+				5DDF24150D5F4031A0FC536B /* Frameworks */,
+				E09CF302FBEE4492B7D21389 /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+		EA66A86AC2BA4410BC67B965 /* ReaderProcess */ = {
+			isa = PBXGroup;
+			children = (
+				B03F85D49D6B4BABB106CCC9 /* Source Files */,
+				8B5A17204BA84B7DA1828951 /* /Users/user/CLionProjects/Pks_project/ReaderProcess/CMakeLists.txt */,
+			);
+			name = ReaderProcess;
+			sourceTree = "<group>";
+		};
+		ED9D092319F64F5B9B04F57E /* OutputProcess */ = {
+			isa = PBXGroup;
+			children = (
+				47119E20CE574096B626087E /* Source Files */,
+				F196AC9E100147F7800F167A /* /Users/user/CLionProjects/Pks_project/OutputProcess/CMakeLists.txt */,
+			);
+			name = OutputProcess;
+			sourceTree = "<group>";
+		};
+		EE156A574CF14CE193AF1455 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDB73D4C7AA24C0D95E9D18A /* OutputProcess */,
+				634E5A77D5974CA8B8D7D438 /* Protocol */,
+				0EB2BF8B42254FB593B2DDD8 /* ReaderProcess */,
+				0DDE0D53E8DC4CA99D404390 /* main */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		09180B84A58F0F386124BCEE /* main */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51831EE7090F4A5F8A0BC274 /* Build configuration list for PBXNativeTarget "main" */;
+			buildPhases = (
+				97F3AD67DDED493CB8E197F8 /* Sources */,
+				0FC4182C81BA48369A9179DE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CA66E1D44024826BB9C8F94 /* PBXTargetDependency */,
+				E7C436F920BC407A8C323B2C /* PBXTargetDependency */,
+				6DA37E080D0742AD95B53A7F /* PBXTargetDependency */,
+				90941565B3084C5E993050D2 /* PBXTargetDependency */,
+			);
+			name = main;
+			productName = main;
+			productReference = 0DDE0D53E8DC4CA99D404390 /* main */;
+			productType = "com.apple.product-type.tool";
+		};
+		69E269866CD2FF7854EB70DB /* OutputProcess */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9220B21F795C4CFDAAA68CC7 /* Build configuration list for PBXNativeTarget "OutputProcess" */;
+			buildPhases = (
+				EE971E9E1D9A413E94B637D2 /* Sources */,
+				1E6FAB1C002749728C2EA355 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37A6ADF516D741D789CCD5D4 /* PBXTargetDependency */,
+				AF939EE136C743968A2B2848 /* PBXTargetDependency */,
+			);
+			name = OutputProcess;
+			productName = OutputProcess;
+			productReference = BDB73D4C7AA24C0D95E9D18A /* OutputProcess */;
+			productType = "com.apple.product-type.tool";
+		};
+		C0A2DE2C1CC9D09FFB747A74 /* ReaderProcess */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F544283517B6429CAC937C77 /* Build configuration list for PBXNativeTarget "ReaderProcess" */;
+			buildPhases = (
+				C5BF84B837BA4F978BD53FF4 /* Sources */,
+				2EBC9918AF5444A184AF2E16 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C93F85888F34D1EBE067051 /* PBXTargetDependency */,
+				76FB2DCF3905492CA307B7CF /* PBXTargetDependency */,
+			);
+			name = ReaderProcess;
+			productName = ReaderProcess;
+			productReference = 0EB2BF8B42254FB593B2DDD8 /* ReaderProcess */;
+			productType = "com.apple.product-type.tool";
+		};
+		C0FE6373D1B3E5FF21539B1E /* Protocol */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14059EA6B7A04141B4067699 /* Build configuration list for PBXNativeTarget "Protocol" */;
+			buildPhases = (
+				4DD48DD3D237448DB81AADBF /* Sources */,
+				6676A2D7418D43FE96E560C3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B0BB5BBDA0B455B833C916B /* PBXTargetDependency */,
+			);
+			name = Protocol;
+			productName = Protocol;
+			productReference = 634E5A77D5974CA8B8D7D438 /* Protocol */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9A7D2A218784F1BB3891E4E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1610;
+			};
+			buildConfigurationList = 99B7B14A6CD848F3934DB625 /* Build configuration list for PBXProject "Pks_project" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				3D9C228011044F8582BBEBE7 /* Debug */,
+				CDC2F4B12B374BB48BC55096 /* Release */,
+				7B6E79A32D9E4819A547327C /* MinSizeRel */,
+				C968E2C56C2143DE95E1D4F4 /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = E57C46DA158B4DA19F98BCB3;
+			projectDirPath = /Users/user/CLionProjects/Pks_project;
+			projectRoot = "";
+			targets = (
+				1C81BE17B0C4A329A43056D2 /* ALL_BUILD */,
+				69E269866CD2FF7854EB70DB /* OutputProcess */,
+				C0FE6373D1B3E5FF21539B1E /* Protocol */,
+				C0A2DE2C1CC9D09FFB747A74 /* ReaderProcess */,
+				996858F280E036ABBEB3633B /* ZERO_CHECK */,
+				09180B84A58F0F386124BCEE /* main */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		29E6F51C28A8730F42348086 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+/Users/user/CLionProjects/Pks_project/xcode_build/CMakeFiles/ZERO_CHECK			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  make -f /Users/user/CLionProjects/Pks_project/xcode_build/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  make -f /Users/user/CLionProjects/Pks_project/xcode_build/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  make -f /Users/user/CLionProjects/Pks_project/xcode_build/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  make -f /Users/user/CLionProjects/Pks_project/xcode_build/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		C4E680558469C6FBA80D8EFC /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+/Users/user/CLionProjects/Pks_project/xcode_build/CMakeFiles/ALL_BUILD			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/user/CLionProjects/Pks_project/xcode_build
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4DD48DD3D237448DB81AADBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44626E16BC1543C28B610BF0 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/DinamicData.cpp */,
+				8206AEA4E36448B3A6B852C2 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/FileData.cpp */,
+				671AE6FF22084E26B62FB4B1 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data.cpp */,
+				DC9F20C980794D82A8673E61 /* /Users/user/CLionProjects/Pks_project/Protocol/Data/data_i.cpp */,
+				FFA137218B494408ACBF2D32 /* /Users/user/CLionProjects/Pks_project/Protocol/Exceptions/out_of_range_exception.cpp */,
+				65A657DFA139464ABECF6957 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/Packet.cpp */,
+				1BB67D51E32740F19B02D1D7 /* /Users/user/CLionProjects/Pks_project/Protocol/Packet/header.cpp */,
+				70AAA44706B84B42BC963146 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/MyReader.cpp */,
+				CDF2A2FB910A47D1894B1C36 /* /Users/user/CLionProjects/Pks_project/Protocol/Reader/Reader.cpp */,
+				C9F458DB5DF945BC908F372B /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/myReceiver.cpp */,
+				A5688A12341A42ED9FA55FCE /* /Users/user/CLionProjects/Pks_project/Protocol/Receivers/receiver.cpp */,
+				FFD034A48A05436CB66B3E95 /* /Users/user/CLionProjects/Pks_project/Protocol/Sendable/Sendable.cpp */,
+				C12E6BFC791F4428B3924817 /* /Users/user/CLionProjects/Pks_project/Protocol/Sender/Sender.cpp */,
+				93062F77F6A542CCB2AAB682 /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/HandShakeStats.cpp */,
+				F1BE43649E444338A43780BF /* /Users/user/CLionProjects/Pks_project/Protocol/Socket/MySocket.cpp */,
+				E98BEFE506F44673B7E0B0BB /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/MyWindow.cpp */,
+				AFDE514C7FB94162961285A0 /* /Users/user/CLionProjects/Pks_project/Protocol/WindowF/WindowF.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97F3AD67DDED493CB8E197F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD3DF99C72664E6CA3E955A6 /* /Users/user/CLionProjects/Pks_project/src/main.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5BF84B837BA4F978BD53FF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F92FC4E563E240649227929B /* /Users/user/CLionProjects/Pks_project/ReaderProcess/reader.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE971E9E1D9A413E94B637D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3758BDE0EF94102B8D89462 /* /Users/user/CLionProjects/Pks_project/OutputProcess/writer.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37A6ADF516D741D789CCD5D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0FE6373D1B3E5FF21539B1E /* Protocol */;
+			targetProxy = 70DE402DA4444BB3B1940346 /* PBXContainerItemProxy */;
+		};
+		4C93F85888F34D1EBE067051 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0FE6373D1B3E5FF21539B1E /* Protocol */;
+			targetProxy = ED56DA6F331E436CAA409F97 /* PBXContainerItemProxy */;
+		};
+		4CA66E1D44024826BB9C8F94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0FE6373D1B3E5FF21539B1E /* Protocol */;
+			targetProxy = EAC5BDA5885047A1B3DB05C2 /* PBXContainerItemProxy */;
+		};
+		5681FA735DD04C1085B4D23C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0A2DE2C1CC9D09FFB747A74 /* ReaderProcess */;
+			targetProxy = 66B0EDA542604475B4B953EE /* PBXContainerItemProxy */;
+		};
+		5B0BB5BBDA0B455B833C916B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 996858F280E036ABBEB3633B /* ZERO_CHECK */;
+			targetProxy = 6268ADF3FDB3435AA9060590 /* PBXContainerItemProxy */;
+		};
+		6DA37E080D0742AD95B53A7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69E269866CD2FF7854EB70DB /* OutputProcess */;
+			targetProxy = 4E8585DE589049DA82AD7CAA /* PBXContainerItemProxy */;
+		};
+		76FB2DCF3905492CA307B7CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 996858F280E036ABBEB3633B /* ZERO_CHECK */;
+			targetProxy = 861E69672564405AB039769C /* PBXContainerItemProxy */;
+		};
+		90941565B3084C5E993050D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 996858F280E036ABBEB3633B /* ZERO_CHECK */;
+			targetProxy = 1E05EDAFAC0E46CD931952BC /* PBXContainerItemProxy */;
+		};
+		91DBD97ED34F43B4ADB52453 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0FE6373D1B3E5FF21539B1E /* Protocol */;
+			targetProxy = 05C919F0FF6343A29DA6E318 /* PBXContainerItemProxy */;
+		};
+		AF939EE136C743968A2B2848 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 996858F280E036ABBEB3633B /* ZERO_CHECK */;
+			targetProxy = B2108ADA4DF64E58B80BADE4 /* PBXContainerItemProxy */;
+		};
+		B333057112784C41868FFD51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 996858F280E036ABBEB3633B /* ZERO_CHECK */;
+			targetProxy = DD2DDEF026784666866FC964 /* PBXContainerItemProxy */;
+		};
+		C61FF8F891DD44C9B40CAE27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69E269866CD2FF7854EB70DB /* OutputProcess */;
+			targetProxy = 86794AD8360A442783242530 /* PBXContainerItemProxy */;
+		};
+		E7C436F920BC407A8C323B2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0A2DE2C1CC9D09FFB747A74 /* ReaderProcess */;
+			targetProxy = A7100E34B7464B7EB8ABBB8D /* PBXContainerItemProxy */;
+		};
+		EC4390178C0347319F1FB295 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 09180B84A58F0F386124BCEE /* main */;
+			targetProxy = 5CB3A3B877B7488AB3FC5DFC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		028A700D0E6D486E80425488 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/MinSizeRel/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OutputProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/OutputProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		09DA15C9C69A4FAD85B382EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/Release/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ReaderProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/ReaderProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		0B547B9B366D427FA36D3783 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		21D720D929B34D4CBCDAEA5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/Debug/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OutputProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/OutputProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		25EB5759952846A9A478EEB2 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/MinSizeRel/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ReaderProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/ReaderProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		2A2E263AA94B4E5CAD02AD41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/lib/Debug;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",BOOST_SYSTEM_NO_LIB,BOOST_SYSTEM_DYN_LINK,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++20' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Protocol;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/Protocol.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		34F5172C969A44799DB0CB4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		3B02C9D3FE464BCF879E4369 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = /Users/user/CLionProjects/Pks_project/xcode_build/build;
+			};
+			name = Release;
+		};
+		4ADCAA11CDD1460580EE7275 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/lib/MinSizeRel;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",BOOST_SYSTEM_NO_LIB,BOOST_SYSTEM_DYN_LINK,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Protocol;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/Protocol.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		5CCD175027C84979A8A01DB2 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/lib/RelWithDebInfo;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",BOOST_SYSTEM_NO_LIB,BOOST_SYSTEM_DYN_LINK,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++20' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Protocol;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/Protocol.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		666CEEF20EB041AE949DFF3C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/RelWithDebInfo/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ReaderProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/ReaderProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		749D2CA14F8046A3BED9BC4E /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		7D778082AED3456E86C3967C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/Debug/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = main;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/main.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		808742B7ED5B4C58ADFFE9A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/Release/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = main;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/main.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		81A6B83F3651483487F7910C /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = /Users/user/CLionProjects/Pks_project/xcode_build/build;
+			};
+			name = MinSizeRel;
+		};
+		8843890BED1C47ADBAFE8663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		8AA7FE2A29EF45C4B80379E4 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/MinSizeRel/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = main;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/main.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		8E31A10AE159483D98487FFC /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/RelWithDebInfo/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = main;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/main.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		9100049891EA44C9B387E68C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		9BFB4A1EB9F64584B97A58FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		A3632BA54D9E49C0BDE1A11D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/Release/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OutputProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/OutputProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		B2BE6590F97C4F3EA98429DB /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/RelWithDebInfo/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OutputProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/OutputProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		CA89E42B9CC44D21A15B469F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/bin/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/opt/homebrew/include,/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/user/CLionProjects/Pks_project/xcode_build/lib/Debug/libProtocol.a,"/opt/homebrew/lib/libboost_system-mt.dylib","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ReaderProcess;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/ReaderProcess.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		F07809A414164B939B14FA99 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		F2AFC64406B74C89AC1AD9FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk;
+				SYMROOT = /Users/user/CLionProjects/Pks_project/xcode_build/build;
+			};
+			name = Debug;
+		};
+		F50B50677AC64CCE8720AAC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		F511C8AF4EE54D74B00A2564 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = /Users/user/CLionProjects/Pks_project/xcode_build/build;
+			};
+			name = RelWithDebInfo;
+		};
+		FBF7B78D760D4375816B9BA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/user/CLionProjects/Pks_project/xcode_build/lib/Release;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",BOOST_SYSTEM_NO_LIB,BOOST_SYSTEM_DYN_LINK,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/user/CLionProjects/Pks_project/Protocol,/Users/user/CLionProjects/Pks_project/src,/Users/user/CLionProjects/Pks_project/Protocol/Reader,/Users/user/CLionProjects/Pks_project/Protocol/Socket,"$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++20' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Protocol;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/opt/homebrew/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/user/CLionProjects/Pks_project/xcode_build/build/Protocol.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14059EA6B7A04141B4067699 /* Build configuration list for PBXNativeTarget "Protocol" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A2E263AA94B4E5CAD02AD41 /* Debug */,
+				FBF7B78D760D4375816B9BA3 /* Release */,
+				4ADCAA11CDD1460580EE7275 /* MinSizeRel */,
+				5CCD175027C84979A8A01DB2 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		51831EE7090F4A5F8A0BC274 /* Build configuration list for PBXNativeTarget "main" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D778082AED3456E86C3967C /* Debug */,
+				808742B7ED5B4C58ADFFE9A5 /* Release */,
+				8AA7FE2A29EF45C4B80379E4 /* MinSizeRel */,
+				8E31A10AE159483D98487FFC /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9220B21F795C4CFDAAA68CC7 /* Build configuration list for PBXNativeTarget "OutputProcess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21D720D929B34D4CBCDAEA5D /* Debug */,
+				A3632BA54D9E49C0BDE1A11D /* Release */,
+				028A700D0E6D486E80425488 /* MinSizeRel */,
+				B2BE6590F97C4F3EA98429DB /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		99B7B14A6CD848F3934DB625 /* Build configuration list for PBXProject "Pks_project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2AFC64406B74C89AC1AD9FB /* Debug */,
+				3B02C9D3FE464BCF879E4369 /* Release */,
+				81A6B83F3651483487F7910C /* MinSizeRel */,
+				F511C8AF4EE54D74B00A2564 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BB80CA0B99794D4B9CC352B1 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F50B50677AC64CCE8720AAC3 /* Debug */,
+				34F5172C969A44799DB0CB4A /* Release */,
+				0B547B9B366D427FA36D3783 /* MinSizeRel */,
+				9100049891EA44C9B387E68C /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BF1421F7061743719B4F5F79 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8843890BED1C47ADBAFE8663 /* Debug */,
+				9BFB4A1EB9F64584B97A58FF /* Release */,
+				F07809A414164B939B14FA99 /* MinSizeRel */,
+				749D2CA14F8046A3BED9BC4E /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F544283517B6429CAC937C77 /* Build configuration list for PBXNativeTarget "ReaderProcess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA89E42B9CC44D21A15B469F /* Debug */,
+				09DA15C9C69A4FAD85B382EA /* Release */,
+				25EB5759952846A9A478EEB2 /* MinSizeRel */,
+				666CEEF20EB041AE949DFF3C /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A9A7D2A218784F1BB3891E4E /* Project object */;
+}

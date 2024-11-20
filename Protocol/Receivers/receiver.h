@@ -26,7 +26,7 @@ public:
         std::cout << "starting a loop" << std::endl;
         //maybe add other functionality later
         while (true) {
-            std::this_thread::sleep_for(std::chrono::seconds(timeout));
+            //std::this_thread::sleep_for(std::chrono::seconds(timeout));
             if (!receiver->onReceive()) {
                 continue;
             }

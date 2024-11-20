@@ -21,6 +21,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 # Include subdirectories for Protocol and ReaderProcess
 add_subdirectory(Protocol)
 add_subdirectory(ReaderProcess)
+add_subdirectory(OutputProcess)
 
 # Main executable
 add_executable(main src/main.cpp)  # Correctly define the main target
@@ -28,9 +29,4 @@ add_executable(main src/main.cpp)  # Correctly define the main target
 # Ensure that Protocol is built before linking
 target_link_libraries(main PRIVATE Protocol)   # Link the main target with Protocol
 
-add_custom_command(
-        TARGET main
-        PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target ReaderProcess
-        COMMENT "Building ReaderProcess before running main"
-)
+add_dependencies(main ReaderProcess OutputProcess)

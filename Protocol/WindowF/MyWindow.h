@@ -11,7 +11,7 @@
 #include <cmath>
 #include "../Sender/Sender.h"
 template <typename T>
-int WindowF<T>::max_buffer_size = 5;
+int WindowF<T>::max_buffer_size = 1024;
 
 template<typename Container, class SendableT>
 class MyWindow: public WindowF<SendableT>, public Sender<Container> {
@@ -59,12 +59,12 @@ public:
     std::thread reSender(int timeout) {
         return std::thread([this, timeout]() {
             while(true) {
-                std::cout << "Resend" << std::endl;
+                //std::cout << "Resend" << std::endl;
                 {
                     std::scoped_lock lock(*this->buffer_m, *this->container_m);
                     moveFromWindowToContainer();
                 }
-                std::this_thread::sleep_for(std::chrono::seconds(timeout));
+                std::this_thread::sleep_for(std::chrono::seconds(1));
             }
         });
     }

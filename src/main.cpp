@@ -6,10 +6,13 @@
 #include <Socket/MySocket.h>
 #include <Receivers/myReceiver.h>
 #include "Data/data_i.h"
+#include <Data/DinamicData.h>
+#include <atomic>
 
 
 int Data::max_buffer_len = 1024;
-template<> int Data_i<std::vector<unsigned char>>::chunk_len = 10;
+
+std::string FileData::path = "";
 
 using boost::asio::ip::udp;
 
@@ -57,42 +60,60 @@ int main() {
 
     auto receiver = std::make_shared<MyReceiver>(socket);
 
-    auto recv_thread = receiver->run(2);
+    auto recv_thread = receiver->run(1);
 
     std::string cmd;
     int message_id = 0;
     std::string arg;
     std::string data;
     auto seq_n = std::make_shared<std::atomic<int>> (-1);
-    std::function<void(std::vector<uint8_t> packet, int packet_id)> lambda;
-    //creating a lambda
-    {
-        lambda = [&](std::vector<uint8_t> packet, int packet_id) {
+    std::function<void(std::vector<uint8_t>, int)> lambda = [&](std::vector<uint8_t> packet, int packet_id) {
+        seq_n->fetch_add(1, std::memory_order_acquire);
 
-            seq_n->fetch_add(1, std::memory_order_acquire);
+        std::cout << seq_n->load() << ": ";
+        for (auto i: packet) {
+            std::cout << static_cast<int>(i) << " ";
+        }
+        std::cout << std::endl;
 
-            //none of bellow can move upper ^
-            std::cout << seq_n->load() << ": ";
-            for (auto i: packet) {
-                std::cout << static_cast<int>(i) << " ";
-            }
-            std::cout << std::endl;
+        Header header;
+        header.setPacketId(packet_id);
+        header.setMessageId(message_id);
+        header.setOffset(packet.size());
+        header.setSequenceNumber(seq_n->load());
 
-            Header header;
-            header.setPacketId(packet_id);
-            header.setMessageId(message_id);
-            header.setOffset(packet.size());
-            header.setSequenceNumber(seq_n->load());
-            Packet to_send(header, packet);
+        Packet to_send(header, packet);
 
-            to_send.show();
+        //to_send.show();
 
-            std::unique_ptr<Sendable> obj = std::make_unique<Packet>(to_send);
+        std::unique_ptr<Sendable> obj = std::make_unique<Packet>(to_send);
 
-            socket->addToContainer(std::move(obj));
-        };
-    }
+        socket->addToContainer(std::move(obj));
+    };
 
+    std::function<void(std::vector<uint8_t>, int)> lambda_file = [&](std::vector<uint8_t> packet, int packet_id) {
+        seq_n->fetch_add(1, std::memory_order_acquire);
+
+        std::cout << seq_n->load() << ": ";
+        for (auto i: packet) {
+            std::cout << static_cast<int>(i) << " ";
+        }
+        std::cout << std::endl;
+
+        Header header(Flags::FILE);
+        header.setPacketId(packet_id);
+        header.setMessageId(message_id);
+        header.setOffset(packet.size());
+        header.setSequenceNumber(seq_n->load());
+
+        Packet to_send(header, packet);
+
+        //to_send.show();
+
+        std::unique_ptr<Sendable> obj = std::make_unique<Packet>(to_send);
+
+        socket->addToContainer(std::move(obj));
+    };
 
     while(cmd != "exit") {
         std::cin >> cmd >> arg;
@@ -107,33 +128,64 @@ int main() {
             socket->getHandShakeStat().first->tryConnect(_port);
 
         }else if (cmd == "message") {
-            Data packet_data;
             if (arg == "-np") {
-                //create a new process
-                create_runner_script("Terminal", "/Users/user/CLionProjects/Pks_project/cmake-build-debug/bin", message_id);
+                auto data_m = std::make_shared<std::mutex>(); // Initialize mutex with a valid object
+                auto packet_data = std::make_shared<DinamicData>();
+                auto flag = std::atomic_bool(true);
 
+                // Create a new process
+                create_runner_script("Terminal", "/Users/user/CLionProjects/Pks_project/cmake-build-debug/bin", message_id);
                 auto fifo_id = getFifo("fifo" + std::to_string(message_id), O_RDONLY);
 
-                char buffer[Data::getChunkLen() + 1];
-                size_t bytesRead;
-                int packet_id = 0;
-                while (true) {
-                    bytesRead = read(fifo_id, buffer, sizeof(buffer) - 1);
-                    if (bytesRead > 0) {
-                        if(bytesRead > 1 && buffer[0] == '/' && buffer[1] == 'e') { break;}
-                        buffer[bytesRead] = '\0';
-                        std::cout << "Parent received: " << buffer << std::endl;
-                        packet_data.addChunk(packet_id, buffer);
-                    } else {
-                        //std::this_thread::sleep_for(std::chrono::seconds(1)); // Optional: sleep to prevent busy-waiting
+                // Pass shared_ptr by value to ensure its lifetime is maintained within the thread
+                auto np_thread = std::thread([data_m, packet_data, &flag, fifo_id]() {
+                    char buffer[Data::getChunkLen() + 1];
+                    size_t bytesRead;
+                    int packet_id = 0;
+
+                    while (true) {
+                        bytesRead = read(fifo_id, buffer, sizeof(buffer) - 1);
+                        if (bytesRead > 0) {
+                            if (bytesRead > 1 && buffer[0] == '/' && buffer[1] == 'e') {
+                                break;
+                            }
+                            buffer[bytesRead] = '\0';
+                            std::cout << "Parent received: " << buffer << std::endl;
+                            {
+                                std::lock_guard<std::mutex> lock(*data_m);  // Corrected lock access
+                                packet_data->addChunk(packet_id, buffer);
+                            }
+                            packet_id++;
+                        } else {
+                            // Optional: sleep to prevent busy-waiting
+                            // std::this_thread::sleep_for(std::chrono::seconds(1));
+                        }
                     }
-                    packet_id ++;
-                }
 
-                close(fifo_id);
+                    close(fifo_id);
+                    flag.store(false, std::memory_order_release);
+                });
 
-                packet_data.forEachPacket(lambda);
+                np_thread.detach();
+
+                auto np_send_thread = std::thread([data_m, &flag, packet_data, lambda]() {
+                    while(flag.load(std::memory_order::seq_cst)) {
+                        {
+                            std::cout << "locking a data" << std::endl;
+                            std::lock_guard<std::mutex> lock(*data_m);
+                            packet_data->forEachPacket(lambda);
+                        }
+                        std::this_thread::sleep_for(std::chrono::seconds(10));
+                    }
+
+                    std::cout << "locking a data" << std::endl;
+                    std::lock_guard<std::mutex> lock(*data_m);
+                    packet_data->forEachPacket(lambda);
+                });
+
+                np_send_thread.detach();
             }else if (arg == "-cp"){
+                Data packet_data;
                 std::cout << "Enter your message : \n";
                 // work in current process.
                 std::string message;
@@ -148,12 +200,107 @@ int main() {
                 continue;
             }
             message_id ++;
+        }else if (cmd == "file") {
+            if (arg == "-cp") {
+                std::string _path = "/Users/user/CLionProjects/Pks_project/README.md";
+                auto data_m = std::make_shared<std::mutex>(); // Initialize mutex with a valid object
+                auto packet_data = std::make_shared<DinamicData>();
+
+                auto flag = std::atomic_bool(true);
+
+
+                auto np_thread = std::thread([data_m, packet_data, &flag, _path]() {
+                    auto chunk_size = packet_data->getChunkLen();
+                    int packet_id = 0;
+                    std::string file_name;
+
+                    //std::cin >> file_name;
+
+                    file_name = "/Users/user/Downloads/PROJECT.zip";
+                    std::cout << "Read from a file" << file_name << std::endl;
+
+                    //TODO delete
+                    //file_name = _path;
+
+                    std::ifstream file(file_name, std::ios::binary);
+
+                    if (!file.is_open()) {
+                        throw std::runtime_error("Couldnt open a file with name " + file_name);
+                    }
+                    std::cout << "file was opened";
+
+                    {
+                        std::lock_guard<std::mutex> lock(*data_m);
+                        {
+                            auto sl_pos = file_name.rfind('/');
+                            file_name = file_name.substr(sl_pos + 1, file_name.size() - sl_pos);
+                            std::cout << "Name of the file: " << file_name << std::endl;
+                        }
+                        packet_data->addChunk(packet_id, file_name);
+                        packet_id++;
+                    }
+
+                    while (true) {
+                        std::vector<char> buffer(chunk_size);
+
+                        file.read(buffer.data(), chunk_size);
+                        std::streamsize bytes_read = file.gcount();
+
+                        if (bytes_read > 0) { // Only process valid chunks
+                            buffer.resize(bytes_read);
+
+                            {
+                                std::lock_guard<std::mutex> lock(*data_m);
+                                std::vector<uint8_t> _buffer(buffer.begin(), buffer.end());
+                                packet_data->addChunk(packet_id, _buffer);
+                                std::cout << "Read: " << buffer.data() << std::endl;
+                                packet_id++;
+                            }
+                        }
+
+                        if (file.eof()) {
+                            break; // Exit the loop when EOF is reached
+                        } else if (file.fail() && !file.eof()) {
+                            std::cerr << "Error reading file!" << std::endl;
+                            break; // Exit on other errors
+                        }
+                    }
+                    flag.store(false, std::memory_order_seq_cst);
+                });
+
+                np_thread.detach();
+
+                auto np_send_thread = std::thread([data_m, &flag, packet_data, lambda_file]() {
+                    while (flag.load(std::memory_order::seq_cst)) {
+                        {
+                            std::lock_guard<std::mutex> lock(*data_m);
+                            packet_data->forEachPacket(lambda_file);
+                        }
+                        std::this_thread::sleep_for(std::chrono::seconds(10));
+                    }
+
+                    std::cout << "locking a data" << std::endl;
+                    std::lock_guard<std::mutex> lock(*data_m);
+                    packet_data->forEachPacket(lambda_file);
+                });
+                np_send_thread.detach();
+            }
         }else if (cmd == "show"){
             auto socket_m = socket->getMessages();
             std::lock_guard<std::mutex> lock(*socket_m.second);
             for (auto& message: *(socket_m.first)) {
                 std::cout << "Message " << message.first << " ";
-                std::cout << message.second.second.toString() << std::endl;
+                auto& _data = message.second.second;
+                std::visit([](auto&_data){
+                        std::cout << "HUI" << std::endl;
+                        using T = std::decay_t<decltype(_data)>;
+                        if constexpr (std::is_same_v<T, Data>) {
+                            std::cout << _data.toString();
+                        } else if constexpr (std::is_same_v<T, FileData>){
+                            std::cout << _data.getName();
+                        }
+                    }, _data);
+                std::cout << std::endl;
             }
         }else {
 

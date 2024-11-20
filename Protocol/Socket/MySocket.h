@@ -9,8 +9,9 @@
 #include <iostream>
 #include <memory>
 #include <unordered_map>
-#include "header.h"
-#include "../Data/data.h"
+#include "Packet/header.h"
+#include "Data/data.h"
+#include "Data/FileData.h"
 #include "HandShakeStats.h"
 #include "../Sendable/Sendable.h"
 #include "../Sender/Sender.h"
@@ -30,7 +31,7 @@ private:
 
     //set for messages, clean message, after finished
     //as a key take message id now, and later combine with ip, for multi speaking
-    std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>> messages;
+    std::shared_ptr<std::unordered_map<int, std::pair<Header, std::variant<Data, FileData>>>> messages;
     std::shared_ptr<std::mutex> messages_m;
 
     //hand shake stats for socket
@@ -56,7 +57,7 @@ public:
 
     std::pair<std::shared_ptr<HandShakeStats>, std::shared_ptr<std::mutex>> getHandShakeStat();
 
-    std::pair<std::shared_ptr<std::unordered_map<int, std::pair<Header, Data>>>, std::shared_ptr<std::mutex>> getMessages();
+    std::pair<std::shared_ptr<std::unordered_map<int, std::pair<Header, std::variant<Data, FileData>>>>, std::shared_ptr<std::mutex>> getMessages();
 
     std::pair<std::shared_ptr<udp::socket>, std::shared_ptr<std::mutex>> getSocket();
 

@@ -6,8 +6,8 @@ add_library(Protocol STATIC
         Socket/MySocket.h
         Data/data.cpp
         Data/data.h
-        Socket/header.cpp
-        Socket/header.h
+        Packet/header.cpp
+        Packet/header.h
         Receivers/receiver.cpp
         Receivers/receiver.h
         Receivers/myReceiver.cpp
@@ -32,6 +32,10 @@ add_library(Protocol STATIC
         Reader/MyReader.h
         Data/data_i.cpp
         Data/data_i.h
+        Data/DinamicData.cpp
+        Data/DinamicData.h
+        Data/FileData.cpp
+        Data/FileData.h
         # Add other Protocol-specific source files here if necessary
 )
 
