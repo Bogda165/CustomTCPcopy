@@ -36,6 +36,10 @@ add_library(Protocol STATIC
         Data/DinamicData.h
         Data/FileData.cpp
         Data/FileData.h
+        ShowObserver/showObserver.cpp
+        ShowObserver/showObserver.h
+        ShowObserver/showObserverTerminal.cpp
+        ShowObserver/showObserverTerminal.h
         # Add other Protocol-specific source files here if necessary
 )
 

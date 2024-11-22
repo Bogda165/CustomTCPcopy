@@ -67,7 +67,7 @@ int main() {
     std::string arg;
     std::string data;
     auto seq_n = std::make_shared<std::atomic<int>> (-1);
-    std::function<void(std::vector<uint8_t>, int)> lambda = [&](std::vector<uint8_t> packet, int packet_id) {
+    std::function<void(std::vector<uint8_t>, int, Header)> lambda = [&](std::vector<uint8_t> packet, int packet_id, Header pre_header) {
         seq_n->fetch_add(1, std::memory_order_acquire);
 
         std::cout << seq_n->load() << ": ";
@@ -76,13 +76,11 @@ int main() {
         }
         std::cout << std::endl;
 
-        Header header;
-        header.setPacketId(packet_id);
-        header.setMessageId(message_id);
-        header.setOffset(packet.size());
-        header.setSequenceNumber(seq_n->load());
+        pre_header.setPacketId(packet_id);
+        pre_header.setOffset(packet.size());
+        pre_header.setSequenceNumber(seq_n->load());
 
-        Packet to_send(header, packet);
+        Packet to_send(pre_header, packet);
 
         //to_send.show();
 
@@ -91,28 +89,15 @@ int main() {
         socket->addToContainer(std::move(obj));
     };
 
-    std::function<void(std::vector<uint8_t>, int)> lambda_file = [&](std::vector<uint8_t> packet, int packet_id) {
-        seq_n->fetch_add(1, std::memory_order_acquire);
+    std::function<void(int, int)> send_ending_packet = [&](int message_id, int amount_of_packets) {
+        Header ending_header(Flags::END);
+        ending_header.setMessageId(message_id);
+        ending_header.setSequenceNumber(-1);
+        ending_header.setPacketId(amount_of_packets);
 
-        std::cout << seq_n->load() << ": ";
-        for (auto i: packet) {
-            std::cout << static_cast<int>(i) << " ";
-        }
-        std::cout << std::endl;
+        std::unique_ptr<Sendable> sendable = std::make_unique<Header>(ending_header);
 
-        Header header(Flags::FILE);
-        header.setPacketId(packet_id);
-        header.setMessageId(message_id);
-        header.setOffset(packet.size());
-        header.setSequenceNumber(seq_n->load());
-
-        Packet to_send(header, packet);
-
-        //to_send.show();
-
-        std::unique_ptr<Sendable> obj = std::make_unique<Packet>(to_send);
-
-        socket->addToContainer(std::move(obj));
+        socket->addToContainer(std::move(sendable));
     };
 
     while(cmd != "exit") {
@@ -128,6 +113,8 @@ int main() {
             socket->getHandShakeStat().first->tryConnect(_port);
 
         }else if (cmd == "message") {
+            Header pre_header;
+            pre_header.setMessageId(message_id);
             if (arg == "-np") {
                 auto data_m = std::make_shared<std::mutex>(); // Initialize mutex with a valid object
                 auto packet_data = std::make_shared<DinamicData>();
@@ -168,19 +155,20 @@ int main() {
 
                 np_thread.detach();
 
-                auto np_send_thread = std::thread([data_m, &flag, packet_data, lambda]() {
+                auto np_send_thread = std::thread([data_m, &flag, packet_data, lambda, pre_header, send_ending_packet]() {
                     while(flag.load(std::memory_order::seq_cst)) {
                         {
                             std::cout << "locking a data" << std::endl;
                             std::lock_guard<std::mutex> lock(*data_m);
-                            packet_data->forEachPacket(lambda);
+                            packet_data->forEachPacketWithArgs(lambda, pre_header);
                         }
                         std::this_thread::sleep_for(std::chrono::seconds(10));
                     }
 
                     std::cout << "locking a data" << std::endl;
                     std::lock_guard<std::mutex> lock(*data_m);
-                    packet_data->forEachPacket(lambda);
+                    packet_data->forEachPacketWithArgs(lambda, pre_header);
+                    send_ending_packet(pre_header.getMessageId(), packet_data->dataAmount());
                 });
 
                 np_send_thread.detach();
@@ -194,7 +182,8 @@ int main() {
                 packet_data.fromString(message);
 
                 //Add to sender
-                packet_data.forEachPacket(lambda);
+                packet_data.forEachPacketWithArgs(lambda, pre_header);
+                send_ending_packet(message_id, packet_data.dataAmount());
             }else {
                 std::cout << "unknown argument" << std::endl;
                 continue;
@@ -202,9 +191,12 @@ int main() {
             message_id ++;
         }else if (cmd == "file") {
             if (arg == "-cp") {
-                std::string _path = "/Users/user/CLionProjects/Pks_project/README.md";
+                std::string _path = "/Users/user/CLionProjects/Pks_project/1.zip";
                 auto data_m = std::make_shared<std::mutex>(); // Initialize mutex with a valid object
                 auto packet_data = std::make_shared<DinamicData>();
+
+                Header pre_header = Header(Flags::FILE);
+                pre_header.setMessageId(message_id);
 
                 auto flag = std::atomic_bool(true);
 
@@ -216,7 +208,7 @@ int main() {
 
                     //std::cin >> file_name;
 
-                    file_name = "/Users/user/Downloads/PROJECT.zip";
+                    file_name = "/Users/user/CLionProjects/Pks_project/1.zip";
                     std::cout << "Read from a file" << file_name << std::endl;
 
                     //TODO delete
@@ -270,18 +262,21 @@ int main() {
 
                 np_thread.detach();
 
-                auto np_send_thread = std::thread([data_m, &flag, packet_data, lambda_file]() {
+                auto np_send_thread = std::thread([data_m, &flag, packet_data, lambda, send_ending_packet, pre_header]() {
                     while (flag.load(std::memory_order::seq_cst)) {
                         {
                             std::lock_guard<std::mutex> lock(*data_m);
-                            packet_data->forEachPacket(lambda_file);
+                            packet_data->forEachPacketWithArgs(lambda, pre_header);
                         }
                         std::this_thread::sleep_for(std::chrono::seconds(10));
                     }
 
                     std::cout << "locking a data" << std::endl;
                     std::lock_guard<std::mutex> lock(*data_m);
-                    packet_data->forEachPacket(lambda_file);
+                    packet_data->forEachPacketWithArgs(lambda, pre_header);
+
+                    // minus one, becuase of first name packet
+                    send_ending_packet(pre_header.getMessageId(), packet_data->dataAmount() - 1);
                 });
                 np_send_thread.detach();
             }

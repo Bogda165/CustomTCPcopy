@@ -19,6 +19,7 @@ public:
         throw std::runtime_error("Using stupid method, do not do it plz man");
     }
     void addChunk(int n, std::vector<uint8_t> chunk) override {
+        data_amount ++;
         if(chunk.size() != chunk_len) {
             std::cout << "Error different chunk size and chunk len " << chunk_len << chunk.size() << std::endl;
         }
@@ -29,6 +30,7 @@ public:
     }
 
     void addChunk(int n, std::string chunk) {
+        data_amount ++;
         buffer[n] = std::move(std::vector<uint8_t>(chunk.begin(), chunk.end()));
         if (n > data_len) {
             data_len = n;
@@ -86,6 +88,10 @@ public:
                 std::cout << static_cast<int>(i) << " ";
             }
         }
+    }
+
+    std::string toString()const override {
+        throw std::runtime_error("its impossible to convert dimanic data to string(");
     }
 
     ~DinamicData() = default;

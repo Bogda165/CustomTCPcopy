@@ -80,6 +80,7 @@ public:
             setName(std::string(chunk.begin(), chunk.end()));
             return;
         }
+        data_amount ++;
 
         if (!file.is_open()) {
             openFile();
@@ -143,6 +144,15 @@ public:
 
     std::string getName() const {
         return path + (name.has_value()? name.value(): " no name");
+    }
+
+    std::string toString() const override {
+        std::string _return;
+        _return += path + "/";
+        if (name.has_value()) {
+            _return += name.value();
+        }
+        return _return;
     }
 
     ~FileData() {

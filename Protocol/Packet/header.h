@@ -14,6 +14,7 @@ enum class Flags {
     SYN = 1,
     ACK2 = 2,
     FILE = 3,
+    END = 4,
 };
 
 //first byte is a flag
@@ -21,7 +22,7 @@ enum class Flags {
 class Header: public Sendable {
 private:
     //flags ack syn
-    std::bitset<4> flags;
+    std::bitset<5> flags;
     int message_id;
     int packet_id;
     int offset;

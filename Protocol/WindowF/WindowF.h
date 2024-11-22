@@ -80,6 +80,7 @@ public:
     void addToBuffer(int seq_n, std::unique_ptr<T> obj) {
         std::scoped_lock lock(*indexes_m, *buffer_m);
         if(seq_n < 0) {
+            std::cout << "trying to add a value with seq_n less then 0" << seq_n << std::endl;
             //priority message
             return;
         }if (seq_n >= indexes->first && seq_n <= indexes->second) {
@@ -103,7 +104,8 @@ public:
             //priority messsage
             std::cout << "Priority message received!!!" << std::endl;
             std::cout << "sequence number: " << seq_n << std::endl;
-            throw std::runtime_error("I mean wtf find me and kill plz");
+
+            throw std::runtime_error("seq number is less then 0 while getting from a buffer");
         }
         if (seq_n >= indexes->first && seq_n < indexes->second) {
             auto it = buffer->find(seq_n);

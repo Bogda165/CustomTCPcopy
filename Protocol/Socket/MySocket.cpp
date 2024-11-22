@@ -41,11 +41,15 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     handShake = std::make_shared<HandShakeStats>(socket, socket_m);
     handShake_m = std::make_shared<std::mutex>();
 
+    showOb = std::make_shared<ShowObserverTerminal>(messages, messages_m);
+
     auto hui = this->runSender(handShake->getEndpoint(), 1);
     auto hui2 = this->reSender(1);
+    auto hui3 = showOb->run();
 
     hui.detach();
     hui2.detach();
+    hui3.detach();
 }
 void MySocket::send_to(std::string send_ip, int port, std::unique_ptr<Sendable> obj, bool flag) {
     {
@@ -147,4 +151,8 @@ void MySocket::showMessages() const {
 
 std::pair<std::shared_ptr<udp::socket>, std::shared_ptr<std::mutex>> MySocket::getSocket(){
     return std::make_pair(socket, socket_m);
+}
+
+std::shared_ptr<ShowObserver> MySocket::getShowObserver() {
+    return showOb;
 }

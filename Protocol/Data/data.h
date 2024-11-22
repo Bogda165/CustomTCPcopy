@@ -95,8 +95,6 @@ public:
 
     void show() const override;
 
-    std::string toString();
-
     std::vector<std::vector<uint8_t>> getDataByPackets() override;
 
     void addIndex(int index);
@@ -108,6 +106,8 @@ public:
     void fromString(std::string str);
 
     void forEachPacket(std::function<void(std::vector<uint8_t>, int)> func) override;
+
+    std::string toString() const override;
 
     ~Data() {
         indexes_b.clear();

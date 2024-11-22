@@ -34,6 +34,9 @@ bool MyReceiver::onReceive() {
     //packet->show();
 
     auto header = std::make_unique<Header>(packet->getHeader());
+    std::cout << "Received header: ";
+    header->show();
+    std::cout << std::endl;
 
     // chech if we need data: Now 2 main types hand shake and message later add acknolegment and keep alive
 
@@ -53,7 +56,12 @@ bool MyReceiver::onReceive() {
         handShake->handleHandShake(std::move(header), sender_endpoint);
 
         return true;
-    }else if(header->getFlags(Flags::ACK2)) {
+     }else if(header->getFlags(Flags::END)) {
+         auto shower = customSocket->getShowObserver();
+         shower->addToBufferLF(header->getMessageId(), header->getPacketId());
+         std::cout << "Fininsh receivng  message with id: " << header->getMessageId() << std::endl;
+         return true;
+     }else if(header->getFlags(Flags::ACK2)) {
         try {
             this->customSocket->getFromBuffer(-1 * (header->getSequenceNumber() + 1));
         }catch(out_of_range_exc &e) {
@@ -64,7 +72,7 @@ bool MyReceiver::onReceive() {
         std::cout << "Recv ack for " << header->getMessageId() << ": " << header->getPacketId() << std::endl;
         return true;
 
-    }else {
+     }else {
         std::cout << "Process message" << std::endl;
         // just a usual message
         //get message id

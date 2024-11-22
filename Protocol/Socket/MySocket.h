@@ -17,6 +17,8 @@
 #include "../Sender/Sender.h"
 #include "../WindowF/MyWindow.h"
 #include <queue>
+#include <ShowObserver/showObserverTerminal.h>
+#include <ShowObserver/showObserver.h>
 
 using boost::asio::ip::udp;
 
@@ -37,6 +39,8 @@ private:
     //hand shake stats for socket
     std::shared_ptr<HandShakeStats> handShake;
     std::shared_ptr<std::mutex> handShake_m;
+
+    std::shared_ptr<ShowObserver> showOb;
 
 public:
     MySocket(int port, std::string ip, boost::asio::io_context& io_context);
@@ -74,6 +78,8 @@ public:
     virtual int size() const override;
 
     void showMessages()const;
+
+    std::shared_ptr<ShowObserver> getShowObserver();
 };
 
 

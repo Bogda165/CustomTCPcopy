@@ -16,6 +16,7 @@ Data::Data() {
 void Data::insertChunk(int n, std::vector<uint8_t> chunk) {
 
     buffer_s = status::FILLED;
+    data_amount ++;
 
     if (type == data_type::VEC) {
         if (chunk.size() != chunk_len) {
@@ -170,7 +171,7 @@ void Data::fromString(std::string str){
     this->addChunk(n, _str);
 }
 
-std::string Data::toString() {
+std::string Data::toString() const {
     auto _buffer = this->getData();
     std::string str(_buffer.begin(), _buffer.end());
 
