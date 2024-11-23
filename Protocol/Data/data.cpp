@@ -73,6 +73,19 @@ void Data::clearBuffer() {
 
 
 void Data::addChunk(int n, std::vector<uint8_t> chunk) {
+    //fuck its smelss shit((((
+    if(chunk_len == 0){
+        chunk_len = chunk.size();
+    }
+    if (chunk_len < chunk.size()) {
+        //as we opssible added a small chunk, we shold move it now
+        std::vector<uint8_t> tmp(chunk.size(), 0);
+        std::copy(buffer.begin() + data_len * chunk_len, buffer.begin() + (data_len + 1) * chunk_len, tmp.begin());
+
+        chunk_len = chunk.size();
+
+        insertChunk(data_len, std::move(tmp));
+    }
     auto _buffer = std::vector<uint8_t>(chunk_len, 0);
 
     if (n >= max_buffer_len && type == data_type::VEC) {

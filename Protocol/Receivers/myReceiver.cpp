@@ -63,7 +63,23 @@ bool MyReceiver::onReceive() {
          return true;
      }else if(header->getFlags(Flags::ACK2)) {
         try {
-            this->customSocket->getFromBuffer(-1 * (header->getSequenceNumber() + 1));
+            auto _packet = this->customSocket->getFromBuffer(-1 * (header->getSequenceNumber() + 1));
+
+            std::unique_ptr<Header> _header(dynamic_cast<Header*>(_packet.release()));
+            if (_header) {
+                if(_header->getFlags(Flags::FIN)) {
+                    // I am locking a buffer here be really careful
+                    auto lock = customSocket->getBufferBlock();
+                    lock.release();
+                    if(customSocket->getStatus() == Status::SEND) {
+                        std::cout << "Finish working" << std::endl;
+                        customSocket->finish();
+                        //finish
+                    }
+
+                    customSocket->setStatus(Status::RECV);
+                }
+            }
         }catch(out_of_range_exc &e) {
             if (e.getCode() == OUT_OF_RANGE::LEFT) {
                 std::cout << "ACK was already sent for this message!!!!(())((" << std::endl;
@@ -72,6 +88,20 @@ bool MyReceiver::onReceive() {
         std::cout << "Recv ack for " << header->getMessageId() << ": " << header->getPacketId() << std::endl;
         return true;
 
+     }else if(header->getFlags(Flags::FIN)) {
+         auto send_header = Header(Flags::ACK2, Flags::FIN);
+         send_header.setSequenceNumber(header->getSequenceNumber() * -1 - 1);
+
+         std::unique_ptr<Sendable> _packet = std::make_unique<Header>(send_header);
+         this->customSocket->addToContainer(std::move(_packet));
+
+         if(customSocket->getStatus() == Status::RECV) {
+             std::cout << "Finish working" << std::endl;
+             customSocket->finish();
+         }
+         customSocket->setStatus(Status::SEND);
+
+         return true;
      }else {
         std::cout << "Process message" << std::endl;
         // just a usual message

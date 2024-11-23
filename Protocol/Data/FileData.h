@@ -76,6 +76,9 @@ public:
     }
 
     virtual void addChunk(int n, std::vector<uint8_t> chunk) override {
+        if(chunk_len == 0 || chunk_len < chunk.size()) {
+            chunk_len = chunk.size();
+        }
         if (n == 0) {
             setName(std::string(chunk.begin(), chunk.end()));
             return;

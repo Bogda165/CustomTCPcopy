@@ -22,6 +22,13 @@
 
 using boost::asio::ip::udp;
 
+enum class Status {
+    RECV,
+    SEND,
+    RECV_SEND,
+    STOP,
+};
+
 class MySocket: public MyWindow<std::vector<std::unique_ptr<Sendable>>, Sendable> {
 private:
     // add receive handler
@@ -30,6 +37,7 @@ private:
 
     std::string ip;
     int port;
+    Status status;
 
     //set for messages, clean message, after finished
     //as a key take message id now, and later combine with ip, for multi speaking
@@ -80,6 +88,12 @@ public:
     void showMessages()const;
 
     std::shared_ptr<ShowObserver> getShowObserver();
+
+    void setStatus(Status _status);
+
+    Status getStatus() const;
+
+    void finish();
 };
 
 

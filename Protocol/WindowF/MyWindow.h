@@ -61,7 +61,9 @@ public:
             while(true) {
                 //std::cout << "Resend" << std::endl;
                 {
-                    std::scoped_lock lock(*this->buffer_m, *this->container_m);
+                    std::lock_guard<std::mutex> lock_buffer(*this->buffer_m);
+                    std::lock_guard<std::mutex> lock_container(*this->container_m);
+//                    std::scoped_lock lock(*this->buffer_m, *this->container_m);
                     moveFromWindowToContainer();
                 }
                 std::this_thread::sleep_for(std::chrono::seconds(1));

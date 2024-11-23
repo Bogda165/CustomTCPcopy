@@ -30,6 +30,7 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     this->port = port;
     this->ip = ip;
 
+
     // Binding sockets
     socket = std::make_shared<udp::socket>(udp::socket(io_context, udp::endpoint(boost::asio::ip::make_address(ip), port)));
     socket_m = std::make_shared<std::mutex>();
@@ -50,6 +51,7 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     hui.detach();
     hui2.detach();
     hui3.detach();
+    this->status = Status::RECV_SEND;
 }
 void MySocket::send_to(std::string send_ip, int port, std::unique_ptr<Sendable> obj, bool flag) {
     {
@@ -155,4 +157,35 @@ std::pair<std::shared_ptr<udp::socket>, std::shared_ptr<std::mutex>> MySocket::g
 
 std::shared_ptr<ShowObserver> MySocket::getShowObserver() {
     return showOb;
+}
+
+void MySocket::setStatus(Status _status) {
+    status = _status;
+}
+
+Status MySocket::getStatus() const {
+    return this->status;
+}
+
+void MySocket::finish() {
+    bool cond = true;
+    while(cond) {
+        cond = false;
+        {
+            std::lock_guard<std::mutex> lock(*this->container_m);
+            for (auto &packet: *container) {
+                auto packet_clone = packet->clone();
+                std::unique_ptr<Packet> _packet(dynamic_cast<Packet *>(packet.release()));
+
+                if (_packet) {
+                    if (_packet->getHeader().getSequenceNumber() < 0) {
+                        cond = true;
+                        continue;
+                    }
+                }
+            }
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+    exit(0);
 }

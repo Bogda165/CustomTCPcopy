@@ -10,6 +10,7 @@
 #include <memory>
 #include <stdexcept>
 #include "../Exceptions/out_of_range_exception.h"
+#include <condition_variable>
 using tp = std::chrono::system_clock::time_point;
 
 template<typename HUI>
@@ -93,6 +94,12 @@ public:
             auto type = whichOutOfRangeLF(seq_n);
             throw out_of_range_exc(type,  "out of range " + std::to_string(static_cast<int>(type)));
         }
+    }
+
+    std::unique_lock<std::mutex> getBufferBlock() {
+        std::unique_lock<std::mutex> lock(*this->buffer_m);
+
+        return std::move(lock);
     }
 
     std::unique_ptr<T> getFromBuffer(int seq_n) {

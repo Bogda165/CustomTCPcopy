@@ -21,7 +21,7 @@ class Data_i {
     );
 
 protected:
-    static int chunk_len;
+    int chunk_len;
 
     Buffer buffer;
     int data_len;
@@ -32,10 +32,15 @@ public:
         buffer = Buffer();
         data_len = 0;
         data_amount = 0;
+        chunk_len = 0;
     }
 
-    static int getChunkLen() {
+    int getChunkLen() {
         return chunk_len;
+    }
+
+    int setChunkLen(int newlen) {
+        chunk_len =  newlen;
     }
 
     int getDataLen() const {
@@ -64,9 +69,6 @@ public:
 
     virtual ~Data_i() = default;
 };
-
-template <typename Buffer, typename Value, typename Key, typename Packet>
-int Data_i<Buffer, Value, Key, Packet>::chunk_len = 800;
 
 
 #endif //PKS_PROJECT_DATA_I_H

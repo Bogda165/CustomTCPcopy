@@ -8,6 +8,7 @@
 #include "Data/data_i.h"
 #include <Data/DinamicData.h>
 #include <atomic>
+#include "Configure.h"
 
 
 int Data::max_buffer_len = 1024;
@@ -52,6 +53,8 @@ int getFifo(std::string fifo_name, int type) {
 int main() {
     boost::asio::io_context io_context;
     int _port;
+
+    Configure configure;
 
     std::cout << "Enter port: ";
     std::cin >> _port;
@@ -112,12 +115,23 @@ int main() {
             // get header
             socket->getHandShakeStat().first->tryConnect(_port);
 
+        }else if (cmd == "fin") {
+            Header header(Flags::FIN);
+            seq_n->fetch_add(1, std::memory_order::acquire);
+            header.setSequenceNumber(seq_n->load());
+
+            std::unique_ptr<Sendable> to_send = std::make_unique<Header>(header);
+            socket->addToContainer(std::move(to_send));
         }else if (cmd == "message") {
             Header pre_header;
             pre_header.setMessageId(message_id);
             if (arg == "-np") {
+                configure.update();
+                auto current_chunk_len = configure.getChunkLen();
+
                 auto data_m = std::make_shared<std::mutex>(); // Initialize mutex with a valid object
                 auto packet_data = std::make_shared<DinamicData>();
+                packet_data->setChunkLen(current_chunk_len);
                 auto flag = std::atomic_bool(true);
 
                 // Create a new process
@@ -125,8 +139,8 @@ int main() {
                 auto fifo_id = getFifo("fifo" + std::to_string(message_id), O_RDONLY);
 
                 // Pass shared_ptr by value to ensure its lifetime is maintained within the thread
-                auto np_thread = std::thread([data_m, packet_data, &flag, fifo_id]() {
-                    char buffer[Data::getChunkLen() + 1];
+                auto np_thread = std::thread([data_m, packet_data, &flag, fifo_id, current_chunk_len]() {
+                    char buffer[current_chunk_len + 1];
                     size_t bytesRead;
                     int packet_id = 0;
 
@@ -173,7 +187,10 @@ int main() {
 
                 np_send_thread.detach();
             }else if (arg == "-cp"){
+                configure.update();
+                auto current_chunk_len = configure.getChunkLen();
                 Data packet_data;
+                packet_data.setChunkLen(current_chunk_len);
                 std::cout << "Enter your message : \n";
                 // work in current process.
                 std::string message;
@@ -192,9 +209,14 @@ int main() {
         }else if (cmd == "file") {
             if (arg == "-cp") {
                 std::string _path = "/Users/user/CLionProjects/Pks_project/1.zip";
+
+                configure.update();
+                auto current_chunk_len = configure.getChunkLen();
+
                 auto data_m = std::make_shared<std::mutex>(); // Initialize mutex with a valid object
                 auto packet_data = std::make_shared<DinamicData>();
 
+                packet_data->setChunkLen(current_chunk_len);
                 Header pre_header = Header(Flags::FILE);
                 pre_header.setMessageId(message_id);
 

@@ -30,6 +30,9 @@ public:
     }
 
     void addChunk(int n, std::string chunk) {
+        if(chunk_len == 0 || chunk_len < chunk.size()) {
+            chunk_len = chunk.size();
+        }
         data_amount ++;
         buffer[n] = std::move(std::vector<uint8_t>(chunk.begin(), chunk.end()));
         if (n > data_len) {

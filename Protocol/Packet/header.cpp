@@ -5,7 +5,7 @@
 #include "header.h"
 
 Header::Header() {
-    flags = std::bitset<5>();
+    flags = std::bitset<6>();
     message_id = -1;
     packet_id = -1;
     offset = -1;
@@ -56,6 +56,7 @@ void Header::fromU8(std::vector<uint8_t> buffer) {
     flags[2] = flags_bits[2];
     flags[3] = flags_bits[3];
     flags[4] = flags_bits[4];
+    flags[5] = flags_bits[5];
 
     std::cout << "Header: " << message_id << " " << packet_id << " " << sequence_number  << " " << offset << std::endl;
 }
