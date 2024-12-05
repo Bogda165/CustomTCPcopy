@@ -44,7 +44,7 @@ public:
 
     bool isConnected();
 
-    void tryConnect(int port);
+    void tryConnect(int port, std::string ip);
 
     int getPort() const;
 

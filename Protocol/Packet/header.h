@@ -16,6 +16,7 @@ enum class Flags {
     FILE = 3,
     END = 4,
     FIN = 5,
+    KEEP = 6,
 };
 
 //first byte is a flag
@@ -23,11 +24,12 @@ enum class Flags {
 class Header: public Sendable {
 private:
     //flags ack syn
-    std::bitset<6> flags;
+    std::bitset<7> flags;
     int message_id;
     int packet_id;
     int offset;
     int sequence_number;
+    int check_sum;
 public:
     Header();
 
@@ -94,7 +96,11 @@ public:
 
     void setOffset(int _offset);
 
-    void setSequenceNumber(int _sq);
+    void setSequenceNumber(int _sq) override;
+
+    int getCheckSum() const;
+
+    void setCheckSum(int check_sum);
 
     void show() const;
 

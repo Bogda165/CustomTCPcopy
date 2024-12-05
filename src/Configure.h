@@ -12,6 +12,8 @@ private:
     std::string ip;
     int port;
     int chunk_len;
+    std::string path;
+    std::string path_to_gui;
     constexpr static std::string name = "config.yaml";
 public:
     Configure(){
@@ -20,13 +22,18 @@ public:
         ip = config["ip"].as<std::string>();
         port = config["port"].as<int>();
 
+        path = config["path"].as<std::string>();
         chunk_len = config["chunk_len"].as<int>();
+
+        path_to_gui = config["gui"].as<std::string>();
 
     };
 
     void update() {
         YAML::Node config = YAML::LoadFile(name);
         chunk_len = config["chunk_len"].as<int>();
+        path_to_gui = config["gui"].as<std::string>();
+        path = config["path"].as<std::string>();
     }
 
     std::string getIp() const {
@@ -39,6 +46,10 @@ public:
 
     int getChunkLen() const {
         return chunk_len;
+    }
+
+    std::string getGuiPath() const{
+        return path_to_gui;
     }
 
     static std::string getName() {

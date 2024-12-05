@@ -78,4 +78,19 @@ When either one of speakers decide to terminate the connection, a **four-way han
 1. **SYN (Synchronize)**: Initiates a connection.
 2. **ACK (Acknowledgment)**: Acknowledges received data.
 3. **FIN (Finish)**: Indicates that a sender has finished transmitting.
-4. **KIP (Keep alive)**: Indicates a keep alive packet.
+4. **KEEP (Keep alive)**: Indicates a keep alive packet.
+
+
+# CHANGES DURING IMPLEMENTATION
+## 1. ACKs packet id 
+ACKs packet id is packet id of a packet * -1(Because of priority messages with id less then -1)
+
+## 2. Added new flags 
+5. **ACK2 (Acknowledgment2)**: Acknowledgment for handshake.
+6. **FILE (File)**: Indicates that the type of message is a file.
+7. **END (End)**: Indicates the end of a message
+
+## 3. Messages
+Added division into messages, several messages can be sent simultaneously. Added message_id to header.
+
+## 4. Screenshoots

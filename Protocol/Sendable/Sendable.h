@@ -13,6 +13,7 @@ public:
     virtual std::vector<uint8_t> toU8() = 0;
 
     virtual int getSequenceNumber() const = 0;
+    virtual void setSequenceNumber(int seq_n) = 0;
 
     virtual std::unique_ptr<Sendable> clone() const = 0;
 

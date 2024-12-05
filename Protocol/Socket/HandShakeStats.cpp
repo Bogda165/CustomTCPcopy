@@ -24,10 +24,10 @@ int HandShakeStats::getPort() const {
     return this->port;
 }
 
-void HandShakeStats::tryConnect(int _port) {
+void HandShakeStats::tryConnect(int _port, std::string ip) {
     this->step = HandShake::WAITING;
     auto _header = Header(Flags::SYN);
-    auto sender = udp::endpoint(boost::asio::ip::make_address("127.0.0.1"), _port);
+    auto sender = udp::endpoint(boost::asio::ip::make_address(ip.c_str()), _port);
     {
         std::lock_guard<std::mutex> lock((*socket_m));
         socket->send_to(boost::asio::buffer(_header.toU8()), sender);
@@ -58,7 +58,7 @@ void HandShakeStats::handleHandShake(std::unique_ptr<Header> header, udp::endpoi
         this->port = back_endpoint.port();
         {
             std::lock_guard<std::mutex> lock(*endpoint_m);
-            endpoint = std::make_shared<udp::endpoint>(boost::asio::ip::make_address_v4("127.0.0.1"), port);
+            endpoint = std::make_shared<udp::endpoint>(back_endpoint);
         }
         this->connected = true;
     }else if (this->step == HandShake::WAITING && header->getFlags(Flags::ACK) && !header->getFlags(Flags::SYN)) {

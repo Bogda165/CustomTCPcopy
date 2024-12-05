@@ -15,6 +15,7 @@ private:
 
 public:
     Header getHeader();
+    Header& getHeader2();
     std::vector<uint8_t> getChunk();
 
     Packet();
@@ -25,6 +26,9 @@ public:
     virtual std::vector<uint8_t> toU8() override;
     virtual void fromU8(std::vector<uint8_t> buffer) override;
     virtual int getSequenceNumber()const override;
+    void setSequenceNumber(int seq_n) override;
+
+    uint8_t cuclCheckSum();
 
     virtual std::unique_ptr<Sendable> clone() const override {
         return std::make_unique<Packet>(*this);

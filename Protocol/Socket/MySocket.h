@@ -39,6 +39,8 @@ private:
     int port;
     Status status;
 
+    std::shared_ptr<std::atomic_bool> isConnectionAlive;
+
     //set for messages, clean message, after finished
     //as a key take message id now, and later combine with ip, for multi speaking
     std::shared_ptr<std::unordered_map<int, std::pair<Header, std::variant<Data, FileData>>>> messages;
@@ -94,6 +96,8 @@ public:
     Status getStatus() const;
 
     void finish();
+
+    std::shared_ptr<std::atomic_bool> getIsConnectedStatus();
 };
 
 

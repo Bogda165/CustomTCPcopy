@@ -56,3 +56,31 @@ void Packet::fromU8(std::vector<uint8_t> buffer) {
 int Packet::getSequenceNumber() const {
     return header.getSequenceNumber();
 }
+
+void Packet::setSequenceNumber(int seq_n) {
+    this->header.setSequenceNumber(seq_n);
+}
+
+uint8_t Packet::cuclCheckSum() {
+    int sum = 0;
+
+    for (size_t i = 0; i < chunk.size(); i += 2) {
+        uint16_t word = chunk[i]; // First byte
+        if (i + 1 < chunk.size()) {
+            word = (word << 8) | chunk[i + 1]; // Combine with second byte
+        }
+        sum += word;
+        // Handle carry bits (wrap around)
+        if (sum > 0xFFFF) {
+            sum= (sum & 0xFFFF) + 1;
+        }
+    }
+
+    auto check_sum = static_cast<uint8_t>(sum);
+
+    return check_sum;
+}
+
+Header& Packet::getHeader2() {
+    return this->header;
+}

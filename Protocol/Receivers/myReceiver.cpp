@@ -63,6 +63,12 @@ bool MyReceiver::onReceive() {
          return true;
      }else if(header->getFlags(Flags::ACK2)) {
         try {
+            std::cout << "Recv ack for " << header->getMessageId() << ": " << header->getPacketId() << std::endl;
+            if(header->getFlags(Flags::KEEP)) {
+                auto isAlive = this->customSocket->getIsConnectedStatus();
+                isAlive->store(true, std::memory_order_seq_cst);
+                return true;
+            }
             auto _packet = this->customSocket->getFromBuffer(-1 * (header->getSequenceNumber() + 1));
 
             std::unique_ptr<Header> _header(dynamic_cast<Header*>(_packet.release()));
@@ -85,9 +91,14 @@ bool MyReceiver::onReceive() {
                 std::cout << "ACK was already sent for this message!!!!(())((" << std::endl;
             }
         }
-        std::cout << "Recv ack for " << header->getMessageId() << ": " << header->getPacketId() << std::endl;
         return true;
 
+     }else if(header->getFlags(Flags::KEEP)) {
+         auto ack_packet = Header(Flags::ACK2, Flags::KEEP);
+         std::unique_ptr<Sendable> _packet = std::make_unique<Header>(ack_packet);
+         this->customSocket->addToContainer(std::move(_packet));
+
+         return true;
      }else if(header->getFlags(Flags::FIN)) {
          auto send_header = Header(Flags::ACK2, Flags::FIN);
          send_header.setSequenceNumber(header->getSequenceNumber() * -1 - 1);
@@ -103,12 +114,21 @@ bool MyReceiver::onReceive() {
 
          return true;
      }else {
-        std::cout << "Process message" << std::endl;
-        // just a usual message
-        //get message id
-        auto message_id = header->getMessageId();
-        auto _header = header->clone();
-        {
+         std::cout << "Process message" << std::endl;
+         // just a usual message
+         //get message id
+         auto message_id = header->getMessageId();
+         auto _header = header->clone();
+         //check the check_sum
+         {
+             auto check_sum = header->getCheckSum();
+             auto check_sum_correct = packet->cuclCheckSum();
+             if(check_sum != check_sum_correct) {
+                 std::cout << "The packet was damaged during transmission" << std::endl;
+                 return true;
+             }
+         }
+         {
             auto data_b = packet->getChunk();
             //fix
             std::lock_guard<std::mutex> lock(*messages_m);
@@ -135,9 +155,9 @@ bool MyReceiver::onReceive() {
                 auto& _data = message->second.second;
                 std::visit([&data_b, &header](auto& data){data.addChunk(header->getPacketId(), data_b);}, _data);
             }
-        }
+         }
 
-        {
+         {
             //send ack
             auto send_header = Header(Flags::ACK2);
             send_header.setSequenceNumber(_header->getSequenceNumber() * -1 - 1);
@@ -146,8 +166,8 @@ bool MyReceiver::onReceive() {
 
             std::unique_ptr<Sendable> _packet = std::make_unique<Header>(send_header);
             this->customSocket->addToContainer(std::move(_packet));
-        }
-        return true;
+         }
+         return true;
     }
 }
 

@@ -56,9 +56,9 @@ public:
 
     void openFile() {
         if (name.has_value()) {
-            file.open(name.value(), std::ios::out | std::ios::binary);
+            file.open(path + name.value(), std::ios::out | std::ios::binary);
             if (!file.is_open()) {
-                throw std::runtime_error("Could not open file: " + name.value());
+                throw std::runtime_error("Could not open file: " + path + name.value());
             }
         } else {
             throw std::runtime_error("File name is not set.");
@@ -104,9 +104,9 @@ public:
         if (file.is_open()) {
             file.close();
 
-            _file.open(name.value(), std::ios::in | std::ios::binary);
+            _file.open(path + name.value(), std::ios::in | std::ios::binary);
             if (!_file.is_open()) {
-                throw std::runtime_error("Could not open file: " + name.value());
+                throw std::runtime_error("Could not open file: " + path + name.value());
             }
         }
 
@@ -131,7 +131,7 @@ public:
     void show() const override {
         std::cout << path << "/";
         if (name.has_value()) {
-            std::cout << name.value();
+            std::cout << path << name.value();
         }
         std::cout << std::endl;
     }
@@ -153,7 +153,7 @@ public:
         std::string _return;
         _return += path + "/";
         if (name.has_value()) {
-            _return += name.value();
+            _return += path + name.value() ;
         }
         return _return;
     }

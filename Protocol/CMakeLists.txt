@@ -40,6 +40,10 @@ add_library(Protocol STATIC
         ShowObserver/showObserver.h
         ShowObserver/showObserverTerminal.cpp
         ShowObserver/showObserverTerminal.h
+        KeepAlive/keepAlive.cpp
+        KeepAlive/keepAlive.h
+        ShowObserver/showObserverPipe.cpp
+        ShowObserver/showObserverPipe.h
         # Add other Protocol-specific source files here if necessary
 )
 

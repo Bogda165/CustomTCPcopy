@@ -5,7 +5,7 @@
 #include "header.h"
 
 Header::Header() {
-    flags = std::bitset<6>();
+    flags = std::bitset<7>();
     message_id = -1;
     packet_id = -1;
     offset = -1;
@@ -26,6 +26,7 @@ void Header::fromU8(std::vector<uint8_t> buffer) {
     packet_id = 0;
     offset = 0;
     sequence_number = 0;
+    check_sum = 0;
 
     message_id |= buffer[1] << 24;
     message_id |= buffer[2] << 16;
@@ -47,6 +48,11 @@ void Header::fromU8(std::vector<uint8_t> buffer) {
     sequence_number |= buffer [15] << 8;
     sequence_number |= buffer [16];
 
+    check_sum |= buffer[17] << 24;
+    check_sum |= buffer [18] << 16;
+    check_sum |= buffer [19] << 8;
+    check_sum |= buffer [20];
+
     uint8_t flags_byte = buffer[0];
 
     std::bitset<8> flags_bits(flags_byte);
@@ -57,6 +63,7 @@ void Header::fromU8(std::vector<uint8_t> buffer) {
     flags[3] = flags_bits[3];
     flags[4] = flags_bits[4];
     flags[5] = flags_bits[5];
+    flags[6] = flags_bits[6];
 
     std::cout << "Header: " << message_id << " " << packet_id << " " << sequence_number  << " " << offset << std::endl;
 }
@@ -89,6 +96,12 @@ std::vector<uint8_t> Header::toU8() {
     buffer[15] = (val >> 8) & 0xFF;
     buffer[16] = val & 0xFF;
 
+    val = check_sum;
+    buffer[17] = (val >> 24) & 0xFF;
+    buffer[18] = (val >> 16) & 0xFF;
+    buffer[19] = (val >> 8) & 0xFF;
+    buffer[20] = val & 0xFF;
+
     buffer[0] = static_cast<uint8_t>(flags.to_ulong());
 
 
@@ -113,6 +126,14 @@ void Header::setMessageId(int message_id) {
 void Header::show() const {
     std::cout << "Message id: " << message_id << "\npakcet id: " << packet_id << "\nOffset: " << offset << "\nSeq number" << sequence_number << "\nbytes: " << flags[0] << flags[1] << flags[2] << std::endl;
 
+}
+
+int Header::getCheckSum() const {
+    return this->check_sum;
+}
+
+void Header::setCheckSum(int check_sum) {
+    this->check_sum = check_sum;
 }
 
 int Header::getLength() {

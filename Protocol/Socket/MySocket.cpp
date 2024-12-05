@@ -3,6 +3,7 @@
 //
 
 #include "MySocket.h"
+#include "ShowObserver/showObserverPipe.h"
 
 const std::string &MySocket::getIp() {
     return ip;
@@ -42,7 +43,7 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     handShake = std::make_shared<HandShakeStats>(socket, socket_m);
     handShake_m = std::make_shared<std::mutex>();
 
-    showOb = std::make_shared<ShowObserverTerminal>(messages, messages_m);
+    showOb = std::make_shared<ShowObserverPipe>(messages, messages_m, port);
 
     auto hui = this->runSender(handShake->getEndpoint(), 1);
     auto hui2 = this->reSender(1);
@@ -52,6 +53,9 @@ MySocket::MySocket(int port, std::string ip, boost::asio::io_context& io_context
     hui2.detach();
     hui3.detach();
     this->status = Status::RECV_SEND;
+
+    this->isConnectionAlive = std::make_shared<std::atomic_bool>(true);
+
 }
 void MySocket::send_to(std::string send_ip, int port, std::unique_ptr<Sendable> obj, bool flag) {
     {
@@ -79,7 +83,11 @@ void MySocket::sendTo(udp::endpoint endpoint, std::vector<uint8_t> data) {
         }
         send_port = handShake->getPort();
     }
+    int error = std::rand() % 10 + 1;
 
+    if(error == 2) {
+        //data[data.size() - 10] = 0;
+    }
     //add a header
     std::lock_guard<std::mutex> lock(*socket_m);
     this->socket->send_to(boost::asio::buffer(data), udp::endpoint(boost::asio::ip::make_address("127.0.0.1"), send_port));
@@ -188,4 +196,8 @@ void MySocket::finish() {
         std::this_thread::sleep_for(std::chrono::seconds(2));
     }
     exit(0);
+}
+
+std::shared_ptr<std::atomic_bool> MySocket::getIsConnectedStatus() {
+    return isConnectionAlive;
 }
